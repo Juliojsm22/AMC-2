@@ -17,3 +17,4 @@ También puedes clonarlo o descargarlo y abrir directamente `index.html` sin nec
 6. **Capítulo 06:** Algoritmos de Sustitución (`LRU`, `FIFO`, `LFU`, Aleatoria) y Políticas de Escritura (`Write-Through` vs. `Write-Back`) *(Diap. 44–49)*
 7. **Evaluación 07:** **Quiz Interactivo** con 18 reactivos universitarios, puntaje sobre 100, cronómetro, diagnóstico por capítulo y resumen detallado.
 8. **Créditos del Proyecto:** Ficha académica institucional UNI con soporte **Modo Claro / Modo Oscuro**.
+
