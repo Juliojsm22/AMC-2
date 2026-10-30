@@ -1,0 +1,2396 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Unidad 6: Sistema de Memoria | AMC2 — Universidad Nacional de Ingeniería (UNI)</title>
+  <meta name="description" content="Portal académico universitario de la Unidad 6: Sistema de Memoria (AMC2 - UNI). Jerarquía, caracterización, organización interna DRAM/SRAM, memoria caché, funciones de correspondencia, algoritmos de sustitución y políticas de escritura." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&family=Merriweather:wght@700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <!-- Barra de progreso de lectura -->
+  <div class="reading-progress-track" aria-hidden="true">
+    <div class="reading-progress-bar" id="reading-progress-bar"></div>
+  </div>
+
+  <!-- Barra Superior Institucional -->
+  <header class="top-navbar">
+    <div class="brand-group">
+      <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Abrir índice de contenidos" title="Índice">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+          <path d="M3 6h18M3 12h18M3 18h18" stroke-linecap="round"/>
+        </svg>
+      </button>
+
+      <a href="#inicio" class="uni-badge">
+        <span class="uni-logo-frame">
+          <img src="assets/uni-logo.png" alt="Logo Universidad Nacional de Ingeniería (UNI)" class="uni-logo-img" />
+        </span>
+        <div class="brand-titles">
+          <span class="brand-uni">Universidad Nacional de Ingeniería</span>
+          <span class="brand-course">AMC2 · Unidad 6: Sistema de Memoria</span>
+        </div>
+      </a>
+    </div>
+
+    <div class="navbar-actions">
+      <!-- Buscador instantáneo -->
+      <div class="search-box">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+          <circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5" stroke-linecap="round"/>
+        </svg>
+        <input
+          type="search"
+          id="global-search-input"
+          class="search-input"
+          placeholder="Buscar tema o diapositiva…"
+          autocomplete="off"
+          aria-label="Buscar en la Unidad 6"
+        />
+        <kbd class="search-kbd">Ctrl K</kbd>
+        <div class="search-results-dropdown" id="search-results-dropdown" role="listbox"></div>
+      </div>
+
+      <!-- Botón directo al Quiz Evaluativo -->
+      <a href="#quiz-evaluacion" class="nav-btn quiz-cta" title="Ir a la Evaluación Académica Interactiva (18 preguntas)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+          <path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+        </svg>
+        <span class="hide-sm">Quiz Evaluativo</span>
+      </a>
+
+      <!-- Botón Mapa de las 49 Diapositivas -->
+      <button type="button" class="nav-btn" id="open-slides-map-btn" title="Ver índice completo de las 49 diapositivas de Unidad6.pptx">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="3" y="4" width="18" height="16" rx="2"/><path d="M9 4v16M3 10h18"/>
+        </svg>
+        <span class="hide-sm">49 Diapositivas</span>
+      </button>
+
+      <!-- Botón Modo Claro / Oscuro -->
+      <button type="button" class="nav-btn" id="theme-toggle-btn" aria-label="Cambiar entre modo claro y oscuro">
+        <svg id="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+        <svg id="icon-sun" style="display:none" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+        </svg>
+        <span id="theme-toggle-label" class="hide-sm">Oscuro</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Portada Institucional UNI (Diapositiva 1) -->
+  <section class="hero-banner" id="inicio">
+    <div class="hero-inner">
+      <div>
+        <div class="hero-eyebrow">
+          <span>Universidad Nacional de Ingeniería · UNI</span>
+          <span>•</span>
+          <span>Arquitectura de Máquinas Computadoras II (AMC2)</span>
+        </div>
+        <h1 class="hero-title">Unidad 6: Sistema de Memoria</h1>
+        <p class="hero-subtitle">
+          Compendio académico integral estructurado a partir de las <strong>49 diapositivas oficiales</strong> de la cátedra y la bibliografía clásica de William Stallings. Abarca desde la jerarquía y física de celdas semiconductoras hasta la arquitectura de memoria caché, funciones de correspondencia, algoritmos de sustitución y coherencia de escritura.
+        </p>
+        <div class="hero-QuickStats">
+          <div class="stat-pill">
+            <strong>6 Capítulos</strong>
+            <span>Desarrollo teórico riguroso</span>
+          </div>
+          <div class="stat-pill">
+            <strong>49 / 49</strong>
+            <span>Diapositivas integradas</span>
+          </div>
+          <div class="stat-pill">
+            <strong>12 Figuras</strong>
+            <span>Rediseñadas en español</span>
+          </div>
+          <div class="stat-pill">
+            <strong>24 bits</strong>
+            <span>Caso Stallings interactivo</span>
+          </div>
+        </div>
+      </div>
+
+      <aside class="hero-card" aria-label="Programa sintético de la Unidad 6">
+        <div class="hero-card-header">
+          <span>Estructura Curricular de la Unidad</span>
+          <span class="slide-range-chip">Diap. 1–49</span>
+        </div>
+        <ul class="hero-syllabus-list">
+          <li>
+            <a href="#cap1">
+              <span>1. Función de Almacenamiento y Jerarquía</span>
+              <span class="slide-range-chip">Diap. 1–7</span>
+            </a>
+          </li>
+          <li>
+            <a href="#cap2">
+              <span>2. Caracterización del Sistema de Memoria</span>
+              <span class="slide-range-chip">Diap. 8–15</span>
+            </a>
+          </li>
+          <li>
+            <a href="#cap3">
+              <span>3. Organización Interna y Modular (DRAM/SRAM)</span>
+              <span class="slide-range-chip">Diap. 16–22</span>
+            </a>
+          </li>
+          <li>
+            <a href="#cap4">
+              <span>4. Memoria Caché y Localidad de Referencia</span>
+              <span class="slide-range-chip">Diap. 23–28</span>
+            </a>
+          </li>
+          <li>
+            <a href="#cap5">
+              <span>5. Funciones de Correspondencia (Mapeo)</span>
+              <span class="slide-range-chip">Diap. 29–43</span>
+            </a>
+          </li>
+          <li>
+            <a href="#cap6">
+              <span>6. Algoritmos de Sustitución y Escritura</span>
+              <span class="slide-range-chip">Diap. 44–49</span>
+            </a>
+          </li>
+          <li>
+            <a href="#quiz-evaluacion" style="color:#fde68a; font-weight:700">
+              <span>7. Quiz Evaluativo con Puntaje y Resumen</span>
+              <span class="slide-range-chip" style="border-color:#fbbf24; color:#fef08a">18 Preguntas</span>
+            </a>
+          </li>
+        </ul>
+      </aside>
+    </div>
+  </section>
+
+  <!-- Cuerpo Académico con Barra Lateral Fija -->
+  <div class="workspace-layout">
+    <!-- Índice de Navegación (TOC) -->
+    <aside class="toc-sidebar" id="toc-sidebar" aria-label="Tabla de contenido">
+      <div class="toc-title">
+        <span>Contenido Académico</span>
+        <span>AMC2</span>
+      </div>
+      <ul class="toc-nav">
+        <li>
+          <a href="#cap1" class="toc-link active"><span class="toc-num">01</span><span>Almacenamiento y Jerarquía</span></a>
+          <ul class="toc-sublist">
+            <li><a href="#cap1-almacenamiento" class="toc-sublink">Niveles de almacenamiento</a></li>
+            <li><a href="#cap1-metricas" class="toc-sublink">Operaciones y métricas</a></li>
+            <li><a href="#cap1-piramide" class="toc-sublink">Pirámide de jerarquía</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="#cap2" class="toc-link"><span class="toc-num">02</span><span>Caracterización de la Memoria</span></a>
+          <ul class="toc-sublist">
+            <li><a href="#cap2-tecnologia" class="toc-sublink">Función, tecnología y retención</a></li>
+            <li><a href="#cap2-operacion" class="toc-sublink">Familia ROM / RW</a></li>
+            <li><a href="#cap2-acceso" class="toc-sublink">Acceso, direccionamiento y transferencia</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="#cap3" class="toc-link"><span class="toc-num">03</span><span>Organización de Memoria Principal</span></a>
+          <ul class="toc-sublist">
+            <li><a href="#cap3-chips" class="toc-sublink">Matrices y multiplexación</a></li>
+            <li><a href="#cap3-encapsulado" class="toc-sublink">Encapsulados EPROM vs DRAM</a></li>
+            <li><a href="#cap3-dram16m" class="toc-sublink">DRAM de 16 Mb (4M × 4)</a></li>
+            <li><a href="#cap3-modulos" class="toc-sublink">Módulos de 256 KB y 1 MB</a></li>
+            <li><a href="#cap3-refresco" class="toc-sublink">Circuitería de refresco</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="#cap4" class="toc-link"><span class="toc-num">04</span><span>Memoria Caché y Localidad</span></a>
+          <ul class="toc-sublist">
+            <li><a href="#cap4-operacion" class="toc-sublink">Flujo Acierto / Fallo</a></li>
+            <li><a href="#cap4-localidad" class="toc-sublink">Principio de localidad (90–10)</a></li>
+            <li><a href="#cap4-diseno" class="toc-sublink">Diseño y Caso Base (16 MB / 64 KB)</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="#cap5" class="toc-link"><span class="toc-num">05</span><span>Funciones de Correspondencia</span></a>
+          <ul class="toc-sublist">
+            <li><a href="#cap5-directa" class="toc-sublink">A) Correspondencia Directa</a></li>
+            <li><a href="#cap5-asociativa" class="toc-sublink">B) Totalmente Asociativa</a></li>
+            <li><a href="#cap5-conjuntos" class="toc-sublink">C) Asociativa por Conjuntos</a></li>
+            <li><a href="#address-lab" class="toc-sublink">Explorador de 24 bits</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="#cap6" class="toc-link"><span class="toc-num">06</span><span>Sustitución y Políticas de Escritura</span></a>
+          <ul class="toc-sublist">
+            <li><a href="#cap6-sustitucion" class="toc-sublink">LRU, FIFO, LFU y Aleatoria</a></li>
+            <li><a href="#cap6-writethrough" class="toc-sublink">Write-Through vs Write-Back</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="#quiz-evaluacion" class="toc-link"><span class="toc-num">07</span><span>Quiz Evaluativo y Resumen</span></a>
+        </li>
+        <li>
+          <a href="#creditos" class="toc-link"><span class="toc-num">★</span><span>Créditos del Proyecto</span></a>
+        </li>
+      </ul>
+    </aside>
+
+    <!-- Columna Principal de Lectura -->
+    <main class="academic-main">
+
+      <!-- ====================================================================
+           CAPÍTULO 1: FUNCIÓN DE ALMACENAMIENTO Y JERARQUÍA (DIAP. 1–7)
+           ==================================================================== -->
+      <article class="chapter-card" id="cap1">
+        <header class="chapter-header">
+          <div class="chapter-meta">
+            <span class="chapter-number">Capítulo 01</span>
+            <span class="slide-badge">Diapositivas 1 – 7</span>
+          </div>
+          <h2>La Función de Almacenamiento y la Jerarquía de Memoria</h2>
+          <p>
+            Todo computador digital de programa almacenado requiere un subsistema capaz de retener instrucciones y datos a distintas escalas temporales. Dado que ninguna tecnología única ofrece simultáneamente velocidad de picosegundos, capacidad masiva y bajo coste por bit, la ingeniería de computadores estructura el almacenamiento de forma jerárquica.
+          </p>
+        </header>
+
+        <!-- Subsección 1.1: Diapositiva 2 -->
+        <section class="subsection" id="cap1-almacenamiento">
+          <div class="subsection-head">
+            <h3>1.1 Dominios de la Función de Almacenamiento</h3>
+            <span class="slide-badge">Diapositiva 2</span>
+          </div>
+          <p>
+            A nivel arquitectónico global, la función de almacenamiento se reparte en tres grandes dominios operativos según su proximidad a las unidades funcionales del procesador:
+          </p>
+          <div class="grid-3">
+            <div class="concept-box">
+              <h4>1. Registros del CPU</h4>
+              <p>Almacenan operandos, punteros y estados <strong>temporalmente</strong> durante la ejecución inmediata de instrucciones aritmético-lógicas y de control.</p>
+            </div>
+            <div class="concept-box">
+              <h4>2. Memoria Principal</h4>
+              <p>Aloja activamente los <strong>programas en ejecución y sus estructuras de datos</strong>, siendo directamente direccionable por el procesador.</p>
+            </div>
+            <div class="concept-box">
+              <h4>3. Memoria Secundaria</h4>
+              <p>Proporciona almacenamiento <strong>masivo y no volátil</strong> para archivos y sistemas operativos. La cátedra plantea la interrogante <em>«¿Permanente?»</em>: aunque retiene datos sin energía, todo medio físico (magnético, óptico o Flash) posee una vida útil finita de retención.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Subsección 1.2: Diapositiva 3 -->
+        <section class="subsection" id="cap1-metricas">
+          <div class="subsection-head">
+            <h3>1.2 Operaciones Fundamentales, Prestaciones y Métricas</h3>
+            <span class="slide-badge">Diapositiva 3</span>
+          </div>
+          <div class="grid-2">
+            <div class="concept-box">
+              <h4>Operaciones Elementales</h4>
+              <ul class="concept-list">
+                <li><strong>Lectura (Read):</strong> Transferencia de una copia del contenido almacenado en una dirección determinada hacia el exterior de la memoria sin alterar el dato (o restaurándolo si la lectura física es destructiva, como en DRAM).</li>
+                <li><strong>Escritura (Write):</strong> Sustitución controlada del patrón binario alojado en una localidad seleccionada por un nuevo dato suministrado en el bus.</li>
+              </ul>
+            </div>
+            <div class="concept-box">
+              <h4>Prestaciones y Métricas de Evaluación</h4>
+              <ul class="concept-list">
+                <li><strong>Tiempo de acceso (latencia):</strong> En RAM, instante desde que se presenta una dirección válida hasta que el dato está estable en el bus. En memorias no aleatorias, tiempo para situar el mecanismo de lectura/escritura en la posición deseada.</li>
+                <li><strong>Tiempo de ciclo de memoria (t<sub>c</sub>):</strong> Aplicable a memorias de acceso aleatorio; equivale al tiempo de acceso más el tiempo adicional de estabilización o recarga antes de iniciar un segundo acceso consecutivo.</li>
+                <li><strong>Velocidad de transferencia (V<sub>t</sub>):</strong> Ritmo al que los datos entran o salen de la unidad de memoria (en RAM: <code>V<sub>t</sub> = 1 / t<sub>c</sub></code> palabras por segundo).</li>
+                <li><strong>Capacidad:</strong> Volumen total expresado habitualmente en Bytes (<code>B</code>, <code>KB</code>, <code>MB</code>, <code>GB</code>, <code>TB</code>, <code>PB</code>) o en palabras de longitud fija.</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- Subsección 1.3: Diapositiva 4 -->
+        <section class="subsection" id="cap1-jerarquia">
+          <div class="subsection-head">
+            <h3>1.3 Relación Funcional entre Niveles y el Compromiso de Diseño</h3>
+            <span class="slide-badge">Diapositiva 4</span>
+          </div>
+          <p>
+            El diseñador enfrenta tres magnitudes en conflicto: <strong>¿Cuánta capacidad? ¿Qué tan rápido? ¿A qué coste?</strong> La solución consiste en interponer una <strong>Memoria Intermedia (Caché)</strong> entre los registros internos del CPU (<code>L0 = R</code>) y la Memoria Principal (<code>L1</code>), respaldada por la Memoria Secundaria (<code>L3</code>).
+          </p>
+
+          <!-- FIGURA 1.1: Esquema Conceptual Diapositiva 4 -->
+          <figure class="academic-figure">
+            <div class="figure-toolbar">
+              <span class="figure-label">Figura 1.1 · Flujo de Niveles y Gradientes de Tiempo / Capacidad</span>
+              <span class="figure-source">Rediseño vectorial · Diapositiva 4</span>
+            </div>
+            <div class="figure-canvas">
+              <svg viewBox="0 0 860 250" role="img" aria-label="Esquema horizontal de jerarquía de memoria L0, Caché, L1 y L3">
+                <defs>
+                  <marker id="arrowBlue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                    <path d="M 0 1 L 10 5 L 0 9 z" fill="var(--svg-blue)"/>
+                  </marker>
+                  <marker id="arrowGold" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                    <path d="M 0 1 L 10 5 L 0 9 z" fill="var(--svg-gold)"/>
+                  </marker>
+                </defs>
+
+                <!-- Eje superior: Menor tiempo (-t), Menor capacidad (-C) -->
+                <line x1="690" y1="34" x2="155" y2="34" stroke="var(--svg-blue)" stroke-width="2.5" marker-end="url(#arrowBlue)"/>
+                <rect x="305" y="12" width="250" height="26" rx="13" fill="var(--svg-blue-soft)" stroke="var(--svg-blue)"/>
+                <text x="430" y="29" text-anchor="middle" font-size="12" font-weight="700" fill="var(--svg-blue)">−t (Menor latencia) · −C (Menor capacidad)</text>
+
+                <!-- Bloque L0: CPU -->
+                <rect x="45" y="68" width="150" height="106" rx="12" fill="var(--svg-card-alt)" stroke="var(--svg-navy)" stroke-width="2.4"/>
+                <text x="120" y="106" text-anchor="middle" font-size="16" font-weight="800" fill="var(--svg-text)">CPU</text>
+                <text x="120" y="129" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-weight="700" fill="var(--svg-blue)">(L0 = R)</text>
+                <text x="120" y="152" text-anchor="middle" font-size="11.5" fill="var(--svg-text-muted)">Registros internos</text>
+
+                <!-- Flechas CPU <-> Caché -->
+                <line x1="200" y1="110" x2="255" y2="110" stroke="var(--svg-blue)" stroke-width="2.2" marker-end="url(#arrowBlue)"/>
+                <line x1="255" y1="132" x2="200" y2="132" stroke="var(--svg-blue)" stroke-width="2.2" marker-end="url(#arrowBlue)"/>
+
+                <!-- Bloque Memoria Intermedia: Caché -->
+                <rect x="260" y="76" width="160" height="90" rx="12" fill="var(--svg-gold-soft)" stroke="var(--svg-gold)" stroke-width="2.4"/>
+                <text x="340" y="109" text-anchor="middle" font-size="13.5" font-weight="800" fill="var(--svg-text)">Memoria Intermedia</text>
+                <text x="340" y="132" text-anchor="middle" font-size="15" font-weight="800" fill="var(--svg-gold)">Caché</text>
+                <text x="340" y="152" text-anchor="middle" font-size="11" fill="var(--svg-text-muted)">SRAM de alta velocidad</text>
+
+                <!-- Flechas Caché <-> Principal -->
+                <line x1="425" y1="110" x2="480" y2="110" stroke="var(--svg-blue)" stroke-width="2.2" marker-end="url(#arrowBlue)"/>
+                <line x1="480" y1="132" x2="425" y2="132" stroke="var(--svg-blue)" stroke-width="2.2" marker-end="url(#arrowBlue)"/>
+
+                <!-- Bloque L1: Memoria Principal -->
+                <rect x="485" y="68" width="155" height="106" rx="12" fill="var(--svg-card)" stroke="var(--svg-stroke)" stroke-width="2.2"/>
+                <text x="562" y="105" text-anchor="middle" font-size="14.5" font-weight="800" fill="var(--svg-text)">Memoria Principal</text>
+                <text x="562" y="128" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-weight="700" fill="var(--svg-blue)">(L1)</text>
+                <text x="562" y="151" text-anchor="middle" font-size="11.5" fill="var(--svg-text-muted)">DRAM · Programas/Datos</text>
+
+                <!-- Flechas Principal <-> Secundaria -->
+                <line x1="645" y1="110" x2="695" y2="110" stroke="var(--svg-gold)" stroke-width="2.2" marker-end="url(#arrowGold)"/>
+                <line x1="695" y1="132" x2="645" y2="132" stroke="var(--svg-gold)" stroke-width="2.2" marker-end="url(#arrowGold)"/>
+
+                <!-- Bloque L3: Memoria Secundaria -->
+                <rect x="700" y="60" width="135" height="122" rx="12" fill="var(--svg-card)" stroke="var(--svg-stroke)" stroke-width="2.2"/>
+                <text x="767" y="102" text-anchor="middle" font-size="13.5" font-weight="800" fill="var(--svg-text)">Memoria</text>
+                <text x="767" y="120" text-anchor="middle" font-size="13.5" font-weight="800" fill="var(--svg-text)">Secundaria</text>
+                <text x="767" y="142" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-weight="700" fill="var(--svg-gold)">(L3)</text>
+                <text x="767" y="164" text-anchor="middle" font-size="11" fill="var(--svg-text-muted)">Masiva / No volátil</text>
+
+                <!-- Eje inferior: Mayor tiempo (+t), Mayor capacidad (+C) -->
+                <line x1="155" y1="215" x2="695" y2="215" stroke="var(--svg-gold)" stroke-width="2.5" marker-end="url(#arrowGold)"/>
+                <rect x="300" y="199" width="265" height="26" rx="13" fill="var(--svg-gold-soft)" stroke="var(--svg-gold)"/>
+                <text x="432" y="216" text-anchor="middle" font-size="12" font-weight="700" fill="var(--svg-gold)">+t (Mayor latencia) · +C (Mayor capacidad)</text>
+              </svg>
+            </div>
+            <figcaption class="figure-caption">
+              <strong>Lectura del modelo (Diap. 4):</strong> Al desplazarse hacia la izquierda (CPU), disminuyen el tiempo de acceso (<code>−t</code>) y la capacidad (<code>−C</code>), mientras aumenta el coste por bit. Al desplazarse hacia la derecha (Secundaria), crecen la capacidad (<code>+C</code>) y la latencia (<code>+t</code>), reduciéndose drásticamente el coste por bit.
+            </figcaption>
+          </figure>
+        </section>
+
+        <!-- Subsección 1.4: Diapositivas 5, 6 y 7 -->
+        <section class="subsection" id="cap1-piramide">
+          <div class="subsection-head">
+            <h3>1.4 Pirámide Integral de la Jerarquía de Memoria</h3>
+            <span class="slide-badge">Diapositivas 5, 6 y 7</span>
+          </div>
+          <p id="cap1-ejecutable">
+            Al descender por la pirámide ocurren tres leyes simultáneas: <strong>(a) disminuye el coste por bit</strong>, <strong>(b) aumenta la capacidad de almacenamiento</strong>, <strong>(c) aumenta el tiempo de acceso</strong> y <strong>(d) disminuye la frecuencia de acceso de la CPU</strong> gracias al principio de localidad. Asimismo (Diapositiva 7), los niveles superiores conforman la <strong>Memoria Primaria o Ejecutable</strong> (direccionable directamente por instrucciones de máquina), mientras que los niveles inferiores constituyen la <strong>Memoria Secundaria</strong> (accedida mediante controladores de E/S y transferencias de bloques/archivos).
+          </p>
+
+          <!-- FIGURA 1.2: Pirámide Integral en Español (Diapositivas 5, 6 y 7 unificadas) -->
+          <figure class="academic-figure">
+            <div class="figure-toolbar">
+              <span class="figure-label">Figura 1.2 · Pirámide Completa de la Jerarquía de Memoria</span>
+              <span class="figure-source">Síntesis rediseñada en español · Diapositivas 5, 6 y 7</span>
+            </div>
+            <div class="figure-canvas">
+              <svg viewBox="0 0 920 440" role="img" aria-label="Pirámide de jerarquía de memoria con velocidad, capacidad, coste y división primaria vs secundaria">
+                <!-- Llave / Banda Izquierda: Primaria (Ejecutable) vs Secundaria -->
+                <rect x="18" y="28" width="160" height="202" rx="10" fill="var(--svg-green-soft)" stroke="var(--svg-green)" stroke-width="1.8"/>
+                <text x="98" y="115" text-anchor="middle" font-size="13.5" font-weight="800" fill="var(--svg-green)">MEMORIA PRIMARIA</text>
+                <text x="98" y="134" text-anchor="middle" font-size="11.5" font-weight="600" fill="var(--svg-text)">(Ejecutable por CPU)</text>
+                <text x="98" y="156" text-anchor="middle" font-size="10.5" fill="var(--svg-text-muted)">Acceso por bus interno</text>
+
+                <rect x="18" y="242" width="160" height="172" rx="10" fill="var(--svg-purple-soft)" stroke="var(--svg-purple)" stroke-width="1.8"/>
+                <text x="98" y="316" text-anchor="middle" font-size="13.5" font-weight="800" fill="var(--svg-purple)">MEMORIA SECUNDARIA</text>
+                <text x="98" y="335" text-anchor="middle" font-size="11.5" font-weight="600" fill="var(--svg-text)">(No volátil / Auxiliar)</text>
+                <text x="98" y="357" text-anchor="middle" font-size="10.5" fill="var(--svg-text-muted)">Acceso vía E/S (bloques)</text>
+
+                <!-- Nivel 1: Registros CPU -->
+                <polygon points="450,26 510,88 390,88" fill="#1e3a8a" stroke="var(--svg-stroke)" stroke-width="1.5"/>
+                <text x="450" y="68" text-anchor="middle" font-size="11.5" font-weight="800" fill="#ffffff">Registros</text>
+                <text x="450" y="81" text-anchor="middle" font-size="10" fill="#dbeafe">CPU</text>
+                <text x="695" y="58" font-size="12" font-weight="700" fill="var(--svg-text)">~1 ns · Súper rápida · Bytes / KB</text>
+                <text x="695" y="75" font-size="11" fill="var(--svg-text-muted)">Coste máximo (integrada en núcleo)</text>
+                <line x1="512" y1="66" x2="685" y2="66" stroke="var(--svg-stroke-muted)" stroke-dasharray="4 3"/>
+
+                <!-- Nivel 2: Caché L1 / L2 / L3 -->
+                <polygon points="386,94 514,94 562,158 338,158" fill="#2563eb" stroke="var(--svg-stroke)" stroke-width="1.5"/>
+                <text x="450" y="119" text-anchor="middle" font-size="13" font-weight="800" fill="#ffffff">Caché del CPU (L1 · L2 · L3)</text>
+                <text x="450" y="140" text-anchor="middle" font-size="11" fill="#e0f2fe">SRAM estática de baja latencia</text>
+                <text x="695" y="122" font-size="12" font-weight="700" fill="var(--svg-text)">~2 – 10 ns · Muy rápida · KB a MB</text>
+                <text x="695" y="139" font-size="11" fill="var(--svg-text-muted)">Coste alto por bit</text>
+                <line x1="550" y1="128" x2="685" y2="128" stroke="var(--svg-stroke-muted)" stroke-dasharray="4 3"/>
+
+                <!-- Nivel 3: Memoria Principal (RAM) -->
+                <polygon points="334,164 566,164 614,228 286,228" fill="#0284c7" stroke="var(--svg-stroke)" stroke-width="1.5"/>
+                <text x="450" y="192" text-anchor="middle" font-size="13.5" font-weight="800" fill="#ffffff">Memoria Física Principal (RAM)</text>
+                <text x="450" y="212" text-anchor="middle" font-size="11" fill="#e0f2fe">DRAM / SDRAM / DDR-SDRAM</text>
+                <text x="695" y="192" font-size="12" font-weight="700" fill="var(--svg-text)">~50 – 100 ns · Rápida · GB</text>
+                <text x="695" y="209" font-size="11" fill="var(--svg-text-muted)">Coste moderado · Volátil</text>
+                <line x1="600" y1="198" x2="685" y2="198" stroke="var(--svg-stroke-muted)" stroke-dasharray="4 3"/>
+
+                <!-- Nivel 4: Estado Sólido / Discos Magnéticos -->
+                <polygon points="280,242 620,242 666,304 234,304" fill="#d97706" stroke="var(--svg-stroke)" stroke-width="1.5"/>
+                <text x="450" y="269" text-anchor="middle" font-size="13" font-weight="800" fill="#ffffff">Estado Sólido (SSD / Flash) y Discos Magnéticos</text>
+                <text x="450" y="289" text-anchor="middle" font-size="11" fill="#fef3c7">Memoria secundaria y soporte de Memoria Virtual</text>
+                <text x="695" y="268" font-size="12" font-weight="700" fill="var(--svg-text)">~0.1 ms (SSD) a ~10 ms (HDD)</text>
+                <text x="695" y="285" font-size="11" fill="var(--svg-text-muted)">Gran capacidad (GB – TB) · Económica</text>
+                <line x1="652" y1="274" x2="685" y2="274" stroke="var(--svg-stroke-muted)" stroke-dasharray="4 3"/>
+
+                <!-- Nivel 5: Óptica y Cintas Secuenciales / Fuera de línea -->
+                <polygon points="230,310 670,310 718,374 182,374" fill="#b45309" stroke="var(--svg-stroke)" stroke-width="1.5"/>
+                <text x="450" y="337" text-anchor="middle" font-size="13" font-weight="800" fill="#ffffff">Memoria Óptica y Acceso Secuencial (Fuera de Línea)</text>
+                <text x="450" y="357" text-anchor="middle" font-size="11" fill="#ffedd5">CD / DVD / Blu-ray · Cintas magnéticas de respaldo</text>
+                <text x="728" y="336" font-size="12" font-weight="700" fill="var(--svg-text)">Segundos a minutos</text>
+                <text x="728" y="353" font-size="11" fill="var(--svg-text-muted)">Masiva (TB – PB) · Mínimo $/bit</text>
+
+                <!-- Base Indicadora -->
+                <text x="450" y="412" text-anchor="middle" font-size="12.5" font-weight="700" fill="var(--svg-text-muted)">
+                  ▲ Hacia arriba: Mayor Velocidad y Mayor Coste/bit  |  ▼ Hacia abajo: Mayor Capacidad y Menor Frecuencia de Acceso
+                </text>
+              </svg>
+            </div>
+            <figcaption class="figure-caption">
+              <strong>Integración de las Diapositivas 5, 6 y 7:</strong> Combina las métricas clásicas de velocidad/tamaño/coste con la clasificación moderna que incorpora unidades de estado sólido (SSD Flash), discos mecánicos (soporte de memoria virtual basada en archivos), medios ópticos y almacenamiento secuencial fuera de línea.
+            </figcaption>
+          </figure>
+        </section>
+      </article>
+
+      <!-- ====================================================================
+           CAPÍTULO 2: CARACTERIZACIÓN DE LA MEMORIA (DIAP. 8–15)
+           ==================================================================== -->
+      <article class="chapter-card" id="cap2">
+        <header class="chapter-header">
+          <div class="chapter-meta">
+            <span class="chapter-number">Capítulo 02</span>
+            <span class="slide-badge">Diapositivas 8 – 15</span>
+          </div>
+          <h2>Taxonomía y Caracterización del Sistema de Memoria</h2>
+          <p>
+            Las tecnologías de memoria se clasifican rigurosamente bajo siete criterios ortogonales definidos en la Unidad 6: nivel funcional, tecnología física de construcción, retención del dato, operación soportada, método de acceso, modo de direccionamiento y unidad de transferencia.
+          </p>
+        </header>
+
+        <!-- Subsección 2.1: Diapositivas 8, 9 y 10 -->
+        <section class="subsection" id="cap2-tecnologia">
+          <div class="subsection-head">
+            <h3 id="cap2-funcion">2.1 Función, Tecnología de Construcción y Retención del Dato</h3>
+            <span class="slide-badge">Diapositivas 8, 9 y 10</span>
+          </div>
+          <div class="grid-3">
+            <div class="concept-box">
+              <h4>Por Nivel de la Función (Diap. 8)</h4>
+              <ul class="concept-list">
+                <li><strong>Interna al CPU:</strong> Banco de registros generales y de control.</li>
+                <li><strong>Intermedia o Caché:</strong> Amortiguador de velocidad entre CPU y RAM.</li>
+                <li><strong>Primaria o Principal:</strong> Memoria de trabajo del sistema.</li>
+                <li><strong>Secundaria:</strong> Almacenamiento externo o auxiliar masivo.</li>
+              </ul>
+            </div>
+
+            <div class="concept-box">
+              <h4>Por Tecnología Física (Diap. 9)</h4>
+              <ul class="concept-list">
+                <li><strong>Semiconductora:</strong>
+                  <ul>
+                    <li><em>Estática (SRAM):</em> Biestables (históricamente mayormente bipolar; hoy CMOS de 6 transistores).</li>
+                    <li><em>Dinámica (DRAM):</em> Celdas capacitivas en tecnología <strong>MOS</strong>.</li>
+                  </ul>
+                </li>
+                <li><strong>Magnética:</strong> Superficies ferromagnéticas (discos y cintas).</li>
+                <li><strong>Óptica:</strong> Micro-pozos leídos por láser (CD, DVD, Blu-ray).</li>
+                <li><strong>Magneto-Óptica (MO):</strong> Escritura térmica láser y lectura por efecto Kerr.</li>
+                <li><strong>Emergentes:</strong> Proteínas, cristales, iones, hologramas, memristores.</li>
+              </ul>
+            </div>
+
+            <div class="concept-box" id="cap2-retencion">
+              <h4>Por Retención del Dato (Diap. 10)</h4>
+              <ul class="concept-list">
+                <li><strong>Memoria Volátil:</strong> Requiere energía eléctrica continua para conservar la información (SRAM, DRAM).</li>
+                <li><strong>Volátil con Respaldo de Energía:</strong> Chips volátiles de muy bajo consumo asistidos por batería (ej. NVRAM con pila CMOS).</li>
+                <li><strong>Memoria Permanente (No Volátil):</strong> Una vez grabada, conserva el estado binario sin alimentación eléctrica.</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- Subsección 2.2: Diapositiva 11 -->
+        <section class="subsection" id="cap2-operacion">
+          <div class="subsection-head">
+            <h3>2.2 Clasificación por Operación Soportada: RW y Familia ROM</h3>
+            <span class="slide-badge">Diapositiva 11</span>
+          </div>
+          <p>
+            Según la simetría entre lectura y escritura, se distingue entre memorias de <strong>Lectura/Escritura (RW)</strong> —como SRAM y DRAM— y la familia de memorias de solo lectura o mayoritariamente lectura:
+          </p>
+          <div class="table-wrapper">
+            <table class="academic-table">
+              <thead>
+                <tr>
+                  <th>Tipo</th>
+                  <th>Denominación Técnica</th>
+                  <th>Grabación / Escritura</th>
+                  <th>Mecanismo de Borrado</th>
+                  <th>Característica Clave (Diap. 11)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>RW</code></td>
+                  <td>Lectura y Escritura (RAM)</td>
+                  <td>Eléctrica, nivel de palabra/byte, muy rápida</td>
+                  <td>Sobrescritura eléctrica directa</td>
+                  <td>Simetría de tiempos de lectura y escritura; volátil.</td>
+                </tr>
+                <tr>
+                  <td><code>ROM</code></td>
+                  <td>Memoria de Solo Lectura</td>
+                  <td>Máscara litográfica en fábrica</td>
+                  <td>Imposible (irreversible)</td>
+                  <td>Económica solo en grandes lotes industriales; cero errores de carga.</td>
+                </tr>
+                <tr>
+                  <td><code>PROM</code></td>
+                  <td>ROM Programable</td>
+                  <td>Eléctrica (1 sola vez) con programador externo</td>
+                  <td>Imposible (fusibles quemados)</td>
+                  <td>Flexible para series cortas; se entrega virgen de fábrica.</td>
+                </tr>
+                <tr>
+                  <td><code>EPROM</code></td>
+                  <td>PROM Borrable Ópticamente</td>
+                  <td>Eléctrica con voltaje <code>Vpp</code> superior</td>
+                  <td>Luz Ultravioleta (UV) intensa (~20 min)</td>
+                  <td>Borra todo el chip simultáneamente a través de ventana de cuarzo.</td>
+                </tr>
+                <tr>
+                  <td><code>EEPROM</code></td>
+                  <td>PROM Borrable Eléctricamente</td>
+                  <td>Eléctrica en el propio circuito</td>
+                  <td>Eléctrico selectivo a nivel de <strong>byte</strong></td>
+                  <td>Reprogramable sin extraer el chip; más costosa y menos densa que EPROM.</td>
+                </tr>
+                <tr>
+                  <td><code>FLASH</code></td>
+                  <td>Memoria Flash</td>
+                  <td>Eléctrica rápida (alternativa a EEPROM)</td>
+                  <td>Eléctrico por <strong>bloques o sectores</strong></td>
+                  <td>Alta densidad como EPROM + borrado eléctrico rápido; permite RW práctico.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Subsección 2.3: Diapositivas 12, 13, 14 y 15 -->
+        <section class="subsection" id="cap2-acceso">
+          <div class="subsection-head">
+            <h3>2.3 Método de Acceso, Direccionamiento y Unidades de Transferencia</h3>
+            <span class="slide-badge">Diapositivas 12 – 15</span>
+          </div>
+
+          <div class="grid-3">
+            <div class="concept-box">
+              <h4>Método de Acceso (Diap. 12)</h4>
+              <ul class="concept-list">
+                <li><strong>Aleatorio (RAM):</strong> Cualquier localidad se selecciona mediante cableado decodificador independiente en un <em>tiempo constante e idéntico</em> (Ej.: Memorias semiconductoras).</li>
+                <li><strong>Secuencial:</strong> Los datos se organizan en registros lineales; el tiempo de acceso depende directamente de la distancia desde la posición actual (Ej.: Cintas magnéticas).</li>
+                <li><strong>Directo (Semisecuencial):</strong> Combina un <em>posicionamiento directo</em> a la vecindad general (pista) seguido de una <em>búsqueda secuencial</em> o espera rotacional hasta el bloque (Ej.: Unidades de disco).</li>
+              </ul>
+            </div>
+
+            <div class="concept-box" id="cap2-direccionamiento">
+              <h4>Modo de Direccionamiento (Diap. 13)</h4>
+              <ul class="concept-list">
+                <li><strong>Por Posición:</strong> Cada celda posee un índice numérico físico único (dirección de memoria) que determina unívocamente su coordenada física.</li>
+                <li><strong>Por Contenido (Asociativo):</strong> Una palabra se recupera especificando una porción de su propio contenido. Se estructura en pares <code>Etiqueta (Tag) + Datos (Data)</code> y ejecuta una <strong>búsqueda paralela en todas las celdas a la vez</strong>. Es el pilar de las cachés asociativas y TLBs.</li>
+              </ul>
+            </div>
+
+            <div class="concept-box" id="cap2-transferencia">
+              <h4>Transferencia y Otros Criterios (Diap. 14–15)</h4>
+              <ul class="concept-list">
+                <li><strong>Unidad Direccionable:</strong> Mínima ubicación identificable por dirección (usualmente el <strong>Byte</strong>, o palabras internas). Si hay <code>A</code> bits de dirección, existen <code>N = 2<sup>A</sup></code> unidades direccionables.</li>
+                <li><strong>Transferencia Interna:</strong> Bits leídos/escritos en paralelo en RAM, gobernada por la <em>anchura del bus de datos</em>.</li>
+                <li><strong>Transferencia Externa:</strong> Se efectúa en <em>bloques</em> mucho mayores que una palabra (líneas de caché o sectores).</li>
+                <li><strong>Otros criterios (Diap. 14):</strong> Coste por bit, tamaño físico y organización interna.</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+      </article>
+
+      <!-- ====================================================================
+           CAPÍTULO 3: ORGANIZACIÓN DE LA MEMORIA PRINCIPAL (DIAP. 16–22)
+           ==================================================================== -->
+      <article class="chapter-card" id="cap3">
+        <header class="chapter-header">
+          <div class="chapter-meta">
+            <span class="chapter-number">Capítulo 03</span>
+            <span class="slide-badge">Diapositivas 16 – 22</span>
+          </div>
+          <h2>Organización Interna y Modular de la Memoria Principal</h2>
+          <p>
+            El elemento básico de una memoria semiconductora es la <strong>celda de memoria</strong> capaz de representar <code>1 bit</code>, caracterizada por presentar dos estados estables (o semiestables), poder escribirse al menos una vez y poder leerse para detectar su estado. A continuación se analiza cómo millones de estas celdas se estructuran en matrices dentro de un chip y cómo varios chips conforman módulos completos de memoria.
+          </p>
+        </header>
+
+        <!-- Subsección 3.1: Diapositivas 16 y 17 -->
+        <section class="subsection" id="cap3-chips">
+          <div class="subsection-head">
+            <h3>3.1 Organización Matricial de Chips y Multiplexación de Direcciones</h3>
+            <span class="slide-badge">Diapositivas 16 y 17</span>
+          </div>
+          <p>
+            En el diseño de circuitos integrados de memoria existe una decisión estructural clave entre organizar un chip como <code>n × m</code> (varios bits de una palabra por chip) o como <code>n × 1</code> (<strong>un bit por chip</strong>). La topología de <em>un bit por chip</em> reduce el número de terminales (pines) de datos por encapsulado: por ejemplo, para formar palabras de 16 bits con capacidad de 1 Mpalabras (16 Mbits totales), se disponen <strong>16 lotes/chips de 1 Mbit × 1</strong> operando en paralelo, donde cada chip aporta exactamente 1 bit de cada palabra.
+          </p>
+          <div class="grid-2">
+            <div class="concept-box">
+              <h4>Estructura en Matrices Cuadradas</h4>
+              <p>
+                Para evitar decodificadores lineales gigantescos, las celdas se disponen en matrices de <code>r filas × c columnas</code> gobernadas por líneas de activación/selección y líneas de operación. Un chip de <strong>16 Mbits</strong> suele estructurarse internamente en <strong>cuatro matrices cuadradas de 2048 × 2048 celdas</strong> (<code>2048 × 2048 × 4 = 16,777,216 bits</code>), leyendo o escribiendo 4 bits simultáneamente (organización <code>4M × 4</code>).
+              </p>
+            </div>
+            <div class="concept-box">
+              <h4>Multiplexación Fila / Columna</h4>
+              <p>
+                Direccionar <code>4M = 2<sup>22</sup></code> posiciones requeriría 22 pines de dirección dedicados. En las DRAM, la dirección se divide en mitad fila y mitad columna y se envía en dos tiempos por las mismas <strong>11 terminales de dirección</strong> (<code>2<sup>11</sup> = 2,048</code>) mediante las señales <span class="mono">RAS</span> y <span class="mono">CAS</span>.
+              </p>
+            </div>
+          </div>
+
+          <div class="callout gold">
+            <div class="callout-title">Ley Cuadrática de Expansión en DRAM (Diapositiva 17)</div>
+            <p>
+              Debido al direccionamiento multiplexado de filas y columnas, añadir <strong>1 sola terminal adicional de dirección</strong> duplica el rango de filas (<code>×2</code>) y también duplica el rango de columnas (<code>×2</code>). En consecuencia, <strong>la capacidad del chip se multiplica por cuatro (×4)</strong> en cada generación (ej. de 4 Mbits a 16 Mbits, y de 16 Mbits a 64 Mbits).
+            </p>
+          </div>
+        </section>
+
+        <!-- Subsección 3.2: Diapositiva 18 (Figura 4.5 Stallings) -->
+        <section class="subsection" id="cap3-encapsulado">
+          <div class="subsection-head">
+            <h3>3.2 Encapsulado de Memoria y Señales de Terminales</h3>
+            <span class="slide-badge">Diapositiva 18 · Fig. 4.5 Stallings</span>
+          </div>
+          <p>
+            La comparación entre una <strong>EPROM de 8 Mbits (1M × 8)</strong> y una <strong>DRAM de 16 Mbits (4M × 4)</strong> ilustra el impacto directo de la multiplexación sobre el número de pines físicos del encapsulado DIP: pese a tener el doble de capacidad en bits, la DRAM requiere apenas 24 terminales frente a las 32 terminales de la EPROM.
+          </p>
+
+          <!-- FIGURA 3.1: Encapsulados EPROM 8M vs DRAM 16M (Diapositiva 18) -->
+          <figure class="academic-figure">
+            <div class="figure-toolbar">
+              <span class="figure-label">Figura 3.1 · Terminales y Señales Típicas en Encapsulados de Memoria</span>
+              <span class="figure-source">Rediseño vectorial en español · Diapositiva 18 (Stallings Fig. 4.5)</span>
+            </div>
+            <div class="figure-canvas">
+              <svg viewBox="0 0 880 390" role="img" aria-label="Comparación de pines entre EPROM de 8 Mbits de 32 pines y DRAM de 16 Mbits de 24 pines">
+                <!-- (a) EPROM de 8 Mbits (1M x 8) -->
+                <g transform="translate(45, 20)">
+                  <text x="175" y="16" text-anchor="middle" font-size="14" font-weight="800" fill="var(--svg-text)">(a) EPROM de 8 Mbits (1M × 8)</text>
+                  <rect x="95" y="32" width="160" height="292" rx="8" fill="var(--svg-card)" stroke="var(--svg-navy)" stroke-width="2.4"/>
+                  <path d="M 160 32 A 15 15 0 0 0 190 32" fill="none" stroke="var(--svg-navy)" stroke-width="2"/>
+                  <text x="175" y="75" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-weight="700" fill="var(--svg-blue)">1M × 8</text>
+                  <text x="175" y="165" text-anchor="middle" font-size="12" font-weight="700" fill="var(--svg-text)">DIP de 32</text>
+                  <text x="175" y="182" text-anchor="middle" font-size="12" font-weight="700" fill="var(--svg-text)">terminales</text>
+                  <text x="175" y="206" text-anchor="middle" font-size="11" fill="var(--svg-text-muted)">Ancho: 0.6''</text>
+                  <text x="175" y="312" text-anchor="middle" font-size="11" font-weight="600" fill="var(--svg-text-muted)">Vista superior</text>
+
+                  <!-- Pines izquierdos 1..16 y derechos 32..17 resumidos con precisión -->
+                  <g font-family="JetBrains Mono, monospace" font-size="10.5" fill="var(--svg-text)">
+                    <text x="82" y="52" text-anchor="end">A19 → 1</text>   <text x="268" y="52">32 ← Vcc</text>
+                    <text x="82" y="69" text-anchor="end">A16 → 2</text>   <text x="268" y="69">31 ← A18</text>
+                    <text x="82" y="86" text-anchor="end">A15 → 3</text>   <text x="268" y="86">30 ← A17</text>
+                    <text x="82" y="103" text-anchor="end">A12 → 4</text>  <text x="268" y="103">29 ← A14</text>
+                    <text x="82" y="120" text-anchor="end">A7  → 5</text>  <text x="268" y="120">28 ← A13</text>
+                    <text x="82" y="137" text-anchor="end">A6  → 6</text>  <text x="268" y="137">27 ← A8</text>
+                    <text x="82" y="154" text-anchor="end">A5  → 7</text>  <text x="268" y="154">26 ← A9</text>
+                    <text x="82" y="171" text-anchor="end">A4  → 8</text>  <text x="268" y="171">25 ← A11</text>
+                    <text x="82" y="188" text-anchor="end">A3  → 9</text>  <text x="268" y="188" fill="var(--svg-gold)">24 ← Vpp (Prog.)</text>
+                    <text x="82" y="205" text-anchor="end">A2  → 10</text> <text x="268" y="205">23 ← A10</text>
+                    <text x="82" y="222" text-anchor="end">A1  → 11</text> <text x="268" y="222" fill="var(--svg-blue)">22 ← CE (Hab.)</text>
+                    <text x="82" y="239" text-anchor="end">A0  → 12</text> <text x="268" y="239" fill="var(--svg-green)">21 → D7</text>
+                    <text x="82" y="256" text-anchor="end" fill="var(--svg-green)">D0  ← 13</text> <text x="268" y="256" fill="var(--svg-green)">20 → D6</text>
+                    <text x="82" y="273" text-anchor="end" fill="var(--svg-green)">D1  ← 14</text> <text x="268" y="273" fill="var(--svg-green)">19 → D5</text>
+                    <text x="82" y="290" text-anchor="end" fill="var(--svg-green)">D2  ← 15</text> <text x="268" y="290" fill="var(--svg-green)">18 → D4</text>
+                    <text x="82" y="307" text-anchor="end">Vss — 16</text> <text x="268" y="307" fill="var(--svg-green)">17 → D3</text>
+                  </g>
+                  <text x="175" y="350" text-anchor="middle" font-size="11.5" fill="var(--svg-text-muted)">20 pines de dirección (A0–A19) · 8 pines de datos (D0–D7)</text>
+                </g>
+
+                <!-- (b) DRAM de 16 Mbits (4M x 4) -->
+                <g transform="translate(465, 20)">
+                  <text x="180" y="16" text-anchor="middle" font-size="14" font-weight="800" fill="var(--svg-text)">(b) DRAM de 16 Mbits (4M × 4)</text>
+                  <rect x="100" y="32" width="160" height="232" rx="8" fill="var(--svg-card)" stroke="var(--svg-gold)" stroke-width="2.4"/>
+                  <path d="M 165 32 A 15 15 0 0 0 195 32" fill="none" stroke="var(--svg-gold)" stroke-width="2"/>
+                  <text x="180" y="82" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-weight="700" fill="var(--svg-gold)">4M × 4</text>
+                  <text x="180" y="140" text-anchor="middle" font-size="12" font-weight="700" fill="var(--svg-text)">DIP de 24</text>
+                  <text x="180" y="157" text-anchor="middle" font-size="12" font-weight="700" fill="var(--svg-text)">terminales</text>
+                  <text x="180" y="182" text-anchor="middle" font-size="11" fill="var(--svg-text-muted)">Multiplexado</text>
+                  <text x="180" y="250" text-anchor="middle" font-size="11" font-weight="600" fill="var(--svg-text-muted)">Vista superior</text>
+
+                  <g font-family="JetBrains Mono, monospace" font-size="10.5" fill="var(--svg-text)">
+                    <text x="88" y="55" text-anchor="end">Vcc — 1</text>   <text x="272" y="55">24 — Vss</text>
+                    <text x="88" y="73" text-anchor="end" fill="var(--svg-green)">D1  ↔ 2</text>   <text x="272" y="73" fill="var(--svg-green)">23 ↔ D4</text>
+                    <text x="88" y="91" text-anchor="end" fill="var(--svg-green)">D2  ↔ 3</text>   <text x="272" y="91" fill="var(--svg-green)">22 ↔ D3</text>
+                    <text x="88" y="109" text-anchor="end" fill="var(--svg-rose)">WE  → 4</text>   <text x="272" y="109" fill="var(--svg-gold)">21 ← CAS</text>
+                    <text x="88" y="127" text-anchor="end" fill="var(--svg-gold)">RAS → 5</text>   <text x="272" y="127" fill="var(--svg-blue)">20 ← OE</text>
+                    <text x="88" y="145" text-anchor="end" fill="var(--svg-text-muted)">NC  — 6</text>   <text x="272" y="145">19 ← A9</text>
+                    <text x="88" y="163" text-anchor="end">A10 → 7</text>   <text x="272" y="163">18 ← A8</text>
+                    <text x="88" y="181" text-anchor="end">A0  → 8</text>   <text x="272" y="181">17 ← A7</text>
+                    <text x="88" y="199" text-anchor="end">A1  → 9</text>   <text x="272" y="199">16 ← A6</text>
+                    <text x="88" y="217" text-anchor="end">A2  → 10</text>  <text x="272" y="217">15 ← A5</text>
+                    <text x="88" y="235" text-anchor="end">A3  → 11</text>  <text x="272" y="235">14 ← A4</text>
+                    <text x="88" y="253" text-anchor="end">Vcc — 12</text>  <text x="272" y="253">13 — Vss</text>
+                  </g>
+                  <text x="180" y="302" text-anchor="middle" font-size="11.5" fill="var(--svg-text-muted)">11 pines de dirección (A0–A10) usados 2 veces (RAS / CAS)</text>
+                  <text x="180" y="322" text-anchor="middle" font-size="11.5" fill="var(--svg-gold)" font-weight="600">El pin 6 (NC: No Conectado) reserva paridad para 64 Mbits</text>
+                </g>
+              </svg>
+            </div>
+            <figcaption class="figure-caption">
+              <strong>Comparación técnica (Diap. 18):</strong> En la EPROM (izquierda), <code>1M = 2<sup>20</sup></code> exige las 20 líneas <code>A0–A19</code> dedicadas más <code>Vpp</code> (tensión de programación) y <code>CE</code> (Chip Enable). En la DRAM (derecha), los pines bidireccionales <code>D1–D4</code> son gobernados por <code>WE</code> (Write Enable) y <code>OE</code> (Output Enable), mientras <code>A0–A10</code> reciben primero los 11 bits de fila (con <code>RAS</code>) y luego los 11 bits de columna (con <code>CAS</code>).
+            </figcaption>
+          </figure>
+        </section>
+
+        <!-- Subsección 3.3: Diapositiva 19 (Figura 4.4 Stallings) -->
+        <section class="subsection" id="cap3-dram16m">
+          <div class="subsection-head">
+            <h3>3.3 Arquitectura Interna de una DRAM Típica de 16 Mbits (4M × 4)</h3>
+            <span class="slide-badge">Diapositiva 19 · Fig. 4.4 Stallings</span>
+          </div>
+          <p>
+            El diagrama funcional interno de la DRAM de 16 Mbits muestra cómo interactúan los buffers de dirección, la matriz cuádruple de celdas, los amplificadores de lectura/restauración y el circuito autónomo de refresco:
+          </p>
+
+          <!-- FIGURA 3.2: Arquitectura Interna DRAM 16 Mb (Diapositiva 19) -->
+          <figure class="academic-figure">
+            <div class="figure-toolbar">
+              <span class="figure-label">Figura 3.2 · Diagrama de Bloques de una DRAM de 16 Mbits (4M × 4)</span>
+              <span class="figure-source">Rediseño vectorial en español · Diapositiva 19 (Stallings Fig. 4.4)</span>
+            </div>
+            <div class="figure-canvas">
+              <svg viewBox="0 0 900 410" role="img" aria-label="Diagrama interno de una DRAM de 16 Mbits con buffers de filas y columnas, contador de refresco, matriz 2048x2048x4 y buffers de datos">
+                <!-- Señales de Control Superiores -->
+                <g font-family="JetBrains Mono, monospace" font-size="12" font-weight="700" fill="var(--svg-blue)">
+                  <text x="380" y="22" text-anchor="middle">RAS̅</text>
+                  <text x="430" y="22" text-anchor="middle">CAS̅</text>
+                  <text x="480" y="22" text-anchor="middle">WE̅</text>
+                  <text x="530" y="22" text-anchor="middle">OE̅</text>
+                  <line x1="380" y1="27" x2="380" y2="48" stroke="var(--svg-blue)" stroke-width="2" marker-end="url(#arrowBlue)"/>
+                  <line x1="430" y1="27" x2="430" y2="48" stroke="var(--svg-blue)" stroke-width="2" marker-end="url(#arrowBlue)"/>
+                  <line x1="480" y1="27" x2="480" y2="48" stroke="var(--svg-blue)" stroke-width="2" marker-end="url(#arrowBlue)"/>
+                  <line x1="530" y1="27" x2="530" y2="48" stroke="var(--svg-blue)" stroke-width="2" marker-end="url(#arrowBlue)"/>
+                </g>
+
+                <!-- Temporización y Control -->
+                <rect x="345" y="50" width="220" height="38" rx="6" fill="var(--svg-blue-soft)" stroke="var(--svg-blue)" stroke-width="2"/>
+                <text x="455" y="74" text-anchor="middle" font-size="13" font-weight="800" fill="var(--svg-text)">Temporización y Control</text>
+
+                <!-- Líneas de control hacia Refresco y Buffers E/S -->
+                <path d="M 455 88 V 104 H 165 V 126" fill="none" stroke="var(--svg-stroke)" stroke-width="1.6" marker-end="url(#arrowBlue)"/>
+                <path d="M 455 104 H 740 V 265" fill="none" stroke="var(--svg-stroke)" stroke-width="1.6" marker-end="url(#arrowBlue)"/>
+
+                <!-- Contador de Refresco -->
+                <rect x="105" y="128" width="125" height="54" rx="6" fill="var(--svg-gold-soft)" stroke="var(--svg-gold)" stroke-width="2"/>
+                <text x="167" y="151" text-anchor="middle" font-size="12" font-weight="700" fill="var(--svg-text)">Contador de</text>
+                <text x="167" y="168" text-anchor="middle" font-size="12" font-weight="700" fill="var(--svg-gold)">Refresco</text>
+
+                <!-- Bus de Direcciones A0..A10 -->
+                <g font-family="JetBrains Mono, monospace" font-size="11.5" font-weight="700" fill="var(--svg-text)">
+                  <text x="45" y="232" text-anchor="end">A0</text>
+                  <text x="45" y="252" text-anchor="end">A1</text>
+                  <text x="40" y="278" text-anchor="end">⋮</text>
+                  <text x="45" y="308" text-anchor="end">A10</text>
+                  <path d="M 52 228 H 76 M 52 248 H 76 M 52 304 H 76" stroke="var(--svg-stroke)" stroke-width="1.8"/>
+                  <path d="M 76 220 V 350" stroke="var(--svg-navy)" stroke-width="5"/>
+                  <line x1="76" y1="238" x2="102" y2="238" stroke="var(--svg-navy)" stroke-width="3" marker-end="url(#arrowBlue)"/>
+                  <line x1="76" y1="342" x2="102" y2="342" stroke="var(--svg-navy)" stroke-width="3" marker-end="url(#arrowBlue)"/>
+                </g>
+
+                <!-- Buffer de Direcciones de Filas -->
+                <rect x="105" y="200" width="125" height="86" rx="6" fill="var(--svg-card)" stroke="var(--svg-stroke)" stroke-width="2"/>
+                <text x="167" y="233" text-anchor="middle" font-size="12" font-weight="700" fill="var(--svg-text)">Buffer de</text>
+                <text x="167" y="250" text-anchor="middle" font-size="12" font-weight="700" fill="var(--svg-text)">Direcciones</text>
+                <text x="167" y="267" text-anchor="middle" font-size="12" font-weight="700" fill="var(--svg-blue)">de Filas</text>
+
+                <!-- Buffer de Direcciones de Columnas -->
+                <rect x="105" y="294" width="125" height="86" rx="6" fill="var(--svg-card)" stroke="var(--svg-stroke)" stroke-width="2"/>
+                <text x="167" y="327" text-anchor="middle" font-size="12" font-weight="700" fill="var(--svg-text)">Buffer de</text>
+                <text x="167" y="344" text-anchor="middle" font-size="12" font-weight="700" fill="var(--svg-text)">Direcciones</text>
+                <text x="167" y="361" text-anchor="middle" font-size="12" font-weight="700" fill="var(--svg-blue)">de Columnas</text>
+
+                <!-- MUX -->
+                <rect x="268" y="132" width="56" height="154" rx="6" fill="var(--svg-card-alt)" stroke="var(--svg-navy)" stroke-width="2"/>
+                <text x="296" y="214" text-anchor="middle" font-size="13" font-weight="800" fill="var(--svg-navy)">MUX</text>
+                <line x1="230" y1="155" x2="265" y2="155" stroke="var(--svg-gold)" stroke-width="3" marker-end="url(#arrowGold)"/>
+                <line x1="230" y1="242" x2="265" y2="242" stroke="var(--svg-blue)" stroke-width="3" marker-end="url(#arrowBlue)"/>
+
+                <!-- Decodificador de Filas -->
+                <rect x="364" y="182" width="76" height="112" rx="6" fill="var(--svg-card)" stroke="var(--svg-stroke)" stroke-width="2"/>
+                <text x="402" y="224" text-anchor="middle" font-size="11.5" font-weight="700" fill="var(--svg-text)">Decodif.</text>
+                <text x="402" y="242" text-anchor="middle" font-size="11.5" font-weight="700" fill="var(--svg-text)">de</text>
+                <text x="402" y="260" text-anchor="middle" font-size="11.5" font-weight="700" fill="var(--svg-blue)">Filas</text>
+                <line x1="324" y1="238" x2="361" y2="238" stroke="var(--svg-blue)" stroke-width="3" marker-end="url(#arrowBlue)"/>
+
+                <!-- Matriz de Memoria (2048 x 2048 x 4) -->
+                <rect x="472" y="168" width="182" height="126" rx="8" fill="var(--svg-blue-soft)" stroke="var(--svg-navy)" stroke-width="2.4"/>
+                <text x="563" y="218" text-anchor="middle" font-size="14" font-weight="800" fill="var(--svg-text)">Matriz de Memoria</text>
+                <text x="563" y="242" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-weight="700" fill="var(--svg-blue)">(2048 × 2048 × 4)</text>
+                <text x="563" y="265" text-anchor="middle" font-size="11" fill="var(--svg-text-muted)">16,777,216 celdas MOS</text>
+
+                <!-- Líneas fila hacia matriz -->
+                <line x1="440" y1="198" x2="470" y2="198" stroke="var(--svg-stroke)" stroke-width="1.8" marker-end="url(#arrowBlue)"/>
+                <line x1="440" y1="214" x2="470" y2="214" stroke="var(--svg-stroke)" stroke-width="1.8" marker-end="url(#arrowBlue)"/>
+                <text x="455" y="246" text-anchor="middle" font-size="14" fill="var(--svg-text)">⋮</text>
+                <line x1="440" y1="274" x2="470" y2="274" stroke="var(--svg-stroke)" stroke-width="1.8" marker-end="url(#arrowBlue)"/>
+
+                <!-- Amplificadores de Lectura y Compuerta E/S + Decodificador de Columnas -->
+                <rect x="472" y="308" width="182" height="42" rx="4" fill="var(--svg-green-soft)" stroke="var(--svg-green)" stroke-width="1.8"/>
+                <text x="563" y="326" text-anchor="middle" font-size="11.5" font-weight="700" fill="var(--svg-text)">Amplificadores de Lectura</text>
+                <text x="563" y="342" text-anchor="middle" font-size="11" fill="var(--svg-green)" font-weight="700">y Compuerta de E/S</text>
+
+                <rect x="472" y="352" width="182" height="36" rx="4" fill="var(--svg-card)" stroke="var(--svg-stroke)" stroke-width="1.8"/>
+                <text x="563" y="375" text-anchor="middle" font-size="12" font-weight="700" fill="var(--svg-text)">Decodificador de Columnas</text>
+
+                <!-- Conexión Buffer Columnas -> Decodificador Columnas -->
+                <line x1="230" y1="370" x2="468" y2="370" stroke="var(--svg-blue)" stroke-width="3" marker-end="url(#arrowBlue)"/>
+                <!-- Conexión bidireccional Matriz <-> Sense Amps -->
+                <line x1="510" y1="294" x2="510" y2="308" stroke="var(--svg-stroke)" stroke-width="2"/>
+                <line x1="563" y1="294" x2="563" y2="308" stroke="var(--svg-stroke)" stroke-width="2"/>
+                <line x1="616" y1="294" x2="616" y2="308" stroke="var(--svg-stroke)" stroke-width="2"/>
+
+                <!-- Buffers de Entrada y Salida de Datos -->
+                <rect x="692" y="268" width="112" height="48" rx="5" fill="var(--svg-card)" stroke="var(--svg-stroke)" stroke-width="1.8"/>
+                <text x="748" y="289" text-anchor="middle" font-size="11" font-weight="700" fill="var(--svg-text)">Buffer Entrada</text>
+                <text x="748" y="305" text-anchor="middle" font-size="11" fill="var(--svg-text-muted)">de Datos</text>
+
+                <rect x="692" y="320" width="112" height="48" rx="5" fill="var(--svg-card)" stroke="var(--svg-stroke)" stroke-width="1.8"/>
+                <text x="748" y="341" text-anchor="middle" font-size="11" font-weight="700" fill="var(--svg-text)">Buffer Salida</text>
+                <text x="748" y="357" text-anchor="middle" font-size="11" fill="var(--svg-text-muted)">de Datos</text>
+
+                <line x1="692" y1="292" x2="657" y2="322" stroke="var(--svg-green)" stroke-width="2.2" marker-end="url(#arrowBlue)"/>
+                <line x1="654" y1="336" x2="690" y2="344" stroke="var(--svg-green)" stroke-width="2.2" marker-end="url(#arrowBlue)"/>
+
+                <!-- Pines de Datos D1..D4 -->
+                <path d="M 832 280 V 356" stroke="var(--svg-green)" stroke-width="4"/>
+                <line x1="832" y1="292" x2="806" y2="292" stroke="var(--svg-green)" stroke-width="2.4" marker-end="url(#arrowBlue)"/>
+                <line x1="804" y1="344" x2="830" y2="344" stroke="var(--svg-green)" stroke-width="2.4"/>
+                <g font-family="JetBrains Mono, monospace" font-size="11.5" font-weight="700" fill="var(--svg-green)">
+                  <text x="844" y="290">─ D1</text>
+                  <text x="844" y="310">─ D2</text>
+                  <text x="844" y="330">─ D3</text>
+                  <text x="844" y="350">─ D4</text>
+                </g>
+              </svg>
+            </div>
+            <figcaption class="figure-caption">
+              <strong>Funcionamiento interno (Diap. 19):</strong> El multiplexor (<code>MUX</code>) selecciona entre la dirección de fila capturada desde el bus externo (operación normal) o la cuenta generada por el <strong>Contador de Refresco</strong>. Los cuatro planos de <code>2048 × 2048</code> entregan o reciben simultáneamente 4 bits a través de los amplificadores de lectura y los buffers hacia las terminales bidireccionales <code>D1–D4</code>.
+            </figcaption>
+          </figure>
+        </section>
+
+        <!-- Subsección 3.4: Diapositivas 20 y 21 (Figuras 4.8 y 4.9 Stallings) -->
+        <section class="subsection" id="cap3-modulos">
+          <div class="subsection-head">
+            <h3>3.4 Organización en Módulos de Memoria (256 KB y Expansión a 1 MB)</h3>
+            <span class="slide-badge">Diapositivas 20 y 21 · Fig. 4.8 y 4.9</span>
+          </div>
+          <p>
+            Si un chip individual de memoria contiene únicamente <strong>1 bit por palabra</strong> (por ejemplo, chips de <code>512 × 512 = 256K palabras × 1 bit</code>), entonces para conformar un módulo con palabras de <code>8 bits (1 Byte)</code> se disponen <strong>8 chips idénticos en paralelo</strong>. El <strong>Registro de Dirección de Memoria (MAR)</strong> suministra los mismos 18 bits (9 bits de fila + 9 bits de columna, ya que <code>2<sup>9</sup> = 512</code>) a todos los chips a la vez, y cada chip deposita su bit correspondiente en el <strong>Registro Buffer de Memoria (MBR)</strong>.
+          </p>
+
+          <!-- FIGURA 3.3: Organización Modular 256 KB (Diapositiva 20) -->
+          <figure class="academic-figure">
+            <div class="figure-toolbar">
+              <span class="figure-label">Figura 3.3 · Organización de un Módulo de Memoria de 256 KBytes (1 Grupo de 8 Chips)</span>
+              <span class="figure-source">Rediseño vectorial en español · Diapositiva 20 (Stallings Fig. 4.8)</span>
+            </div>
+            <div class="figure-canvas">
+              <svg viewBox="0 0 860 330" role="img" aria-label="Módulo de memoria de 256 KB con MAR de 18 bits, 8 chips de 512x512 y MBR de 8 bits">
+                <!-- MAR -->
+                <text x="95" y="34" text-anchor="middle" font-size="12.5" font-weight="800" fill="var(--svg-text)">Registro de Dirección</text>
+                <text x="95" y="50" text-anchor="middle" font-size="12.5" font-weight="800" fill="var(--svg-blue)">de Memoria (MAR)</text>
+                <rect x="65" y="64" width="60" height="90" rx="5" fill="var(--svg-blue-soft)" stroke="var(--svg-blue)" stroke-width="2"/>
+                <text x="95" y="102" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-weight="800" fill="var(--svg-blue)">9 bits</text>
+                <text x="95" y="120" text-anchor="middle" font-size="10.5" fill="var(--svg-text-muted)">(Filas)</text>
+
+                <rect x="65" y="154" width="60" height="90" rx="5" fill="var(--svg-gold-soft)" stroke="var(--svg-gold)" stroke-width="2"/>
+                <text x="95" y="192" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-weight="800" fill="var(--svg-gold)">9 bits</text>
+                <text x="95" y="210" text-anchor="middle" font-size="10.5" fill="var(--svg-text-muted)">(Columnas)</text>
+
+                <!-- Líneas de dirección hacia los 8 chips -->
+                <path d="M 125 109 H 230 V 58 H 305" fill="none" stroke="var(--svg-blue)" stroke-width="2.2" marker-end="url(#arrowBlue)"/>
+                <path d="M 230 109 V 238 H 305" fill="none" stroke="var(--svg-blue)" stroke-width="2.2" marker-end="url(#arrowBlue)"/>
+
+                <path d="M 125 199 H 258 V 104 H 370" fill="none" stroke="var(--svg-gold)" stroke-width="2.2" marker-end="url(#arrowGold)"/>
+                <path d="M 258 199 V 284 H 370" fill="none" stroke="var(--svg-gold)" stroke-width="2.2" marker-end="url(#arrowGold)"/>
+
+                <!-- Chip #1 -->
+                <rect x="308" y="24" width="245" height="104" rx="8" fill="var(--svg-card)" stroke="var(--svg-navy)" stroke-width="2"/>
+                <rect x="318" y="34" width="46" height="82" rx="4" fill="var(--svg-blue-soft)" stroke="var(--svg-blue)"/>
+                <text x="341" y="72" text-anchor="middle" font-size="10" font-weight="700" fill="var(--svg-blue)">Decod.</text>
+                <text x="341" y="86" text-anchor="middle" font-size="10" font-weight="700" fill="var(--svg-blue)">1 / 512</text>
+                <text x="452" y="54" text-anchor="middle" font-size="12.5" font-weight="800" fill="var(--svg-text)">Chip #1</text>
+                <text x="452" y="72" text-anchor="middle" font-size="11.5" fill="var(--svg-text-muted)">512 palabras × 512 bits</text>
+                <rect x="372" y="86" width="168" height="32" rx="4" fill="var(--svg-gold-soft)" stroke="var(--svg-gold)"/>
+                <text x="456" y="106" text-anchor="middle" font-size="10.5" font-weight="700" fill="var(--svg-text)">Decodifica 1/512 y lectura bit</text>
+
+                <!-- Puntos suspensivos Chips #2..#7 -->
+                <text x="430" y="168" text-anchor="middle" font-size="13" font-weight="700" fill="var(--svg-text-muted)">⋮  (Chips #2 al #7 en paralelo)  ⋮</text>
+
+                <!-- Chip #8 -->
+                <rect x="308" y="202" width="245" height="104" rx="8" fill="var(--svg-card)" stroke="var(--svg-navy)" stroke-width="2"/>
+                <rect x="318" y="212" width="46" height="82" rx="4" fill="var(--svg-blue-soft)" stroke="var(--svg-blue)"/>
+                <text x="341" y="250" text-anchor="middle" font-size="10" font-weight="700" fill="var(--svg-blue)">Decod.</text>
+                <text x="341" y="264" text-anchor="middle" font-size="10" font-weight="700" fill="var(--svg-blue)">1 / 512</text>
+                <text x="452" y="232" text-anchor="middle" font-size="12.5" font-weight="800" fill="var(--svg-text)">Chip #8</text>
+                <text x="452" y="250" text-anchor="middle" font-size="11.5" fill="var(--svg-text-muted)">512 palabras × 512 bits</text>
+                <rect x="372" y="264" width="168" height="32" rx="4" fill="var(--svg-gold-soft)" stroke="var(--svg-gold)"/>
+                <text x="456" y="284" text-anchor="middle" font-size="10.5" font-weight="700" fill="var(--svg-text)">Decodifica 1/512 y lectura bit</text>
+
+                <!-- MBR -->
+                <text x="748" y="64" text-anchor="middle" font-size="12.5" font-weight="800" fill="var(--svg-text)">Registro Buffer</text>
+                <text x="748" y="80" text-anchor="middle" font-size="12.5" font-weight="800" fill="var(--svg-green)">de Memoria (MBR)</text>
+                <rect x="720" y="96" width="56" height="156" rx="6" fill="var(--svg-green-soft)" stroke="var(--svg-green)" stroke-width="2"/>
+                <g font-family="JetBrains Mono, monospace" font-size="11.5" font-weight="700" fill="var(--svg-text)">
+                  <text x="748" y="116" text-anchor="middle">Bit 1</text>
+                  <line x1="720" y1="124" x2="776" y2="124" stroke="var(--svg-green)"/>
+                  <text x="748" y="142" text-anchor="middle">Bit 2</text>
+                  <line x1="720" y1="150" x2="776" y2="150" stroke="var(--svg-green)"/>
+                  <text x="748" y="182" text-anchor="middle">⋮</text>
+                  <line x1="720" y1="202" x2="776" y2="202" stroke="var(--svg-green)"/>
+                  <text x="748" y="220" text-anchor="middle">Bit 7</text>
+                  <line x1="720" y1="228" x2="776" y2="228" stroke="var(--svg-green)"/>
+                  <text x="748" y="245" text-anchor="middle">Bit 8</text>
+                </g>
+
+                <!-- Salidas Bit #1 y Bit #8 hacia MBR -->
+                <path d="M 456 118 V 136 H 660 V 112 H 718" fill="none" stroke="var(--svg-green)" stroke-width="2.2" marker-end="url(#arrowBlue)"/>
+                <text x="585" y="131" font-size="11" font-weight="700" fill="var(--svg-green)">Bit #1</text>
+
+                <path d="M 456 296 V 316 H 680 V 242 H 718" fill="none" stroke="var(--svg-green)" stroke-width="2.2" marker-end="url(#arrowBlue)"/>
+                <text x="585" y="311" font-size="11" font-weight="700" fill="var(--svg-green)">Bit #8</text>
+              </svg>
+            </div>
+            <figcaption class="figure-caption">
+              <strong> Expansión horizontal (anchura de palabra, Diap. 20):</strong> 8 chips de <code>256K × 1 bit</code> operan simultáneamente para conformar <code>256K palabras × 8 bits = 256 KBytes</code>.
+            </figcaption>
+          </figure>
+
+          <p id="cap3-modulos-1mb">
+            <strong>¿Cómo expandir ahora el número de palabras (profundidad) de 256 KB a 1 MByte usando los mismos chips?</strong> Como muestra la <strong>Diapositiva 21</strong>, se disponen <strong>4 grupos (bancos A, B, C y D)</strong> de 8 chips cada uno (32 chips en total) y se añaden <strong>2 bits adicionales al MAR</strong> (total 20 bits: <code>2<sup>20</sup> = 1M</code>). Esos 2 bits alimentan un decodificador de <strong>Habilitación de Grupo de Chips</strong> que activa la señal <code>E</code> (Enable) de únicamente <strong>1 de los 4 grupos</strong> en cada acceso:
+          </p>
+
+          <!-- FIGURA 3.4: Expansión Modular a 1 MB en 4 Grupos (Diapositiva 21) -->
+          <figure class="academic-figure">
+            <div class="figure-toolbar">
+              <span class="figure-label">Figura 3.4 · Organización de Memoria de 1 MByte (4 Grupos de 8 Chips con Selección de Banco)</span>
+              <span class="figure-source">Rediseño vectorial en español · Diapositiva 21 (Stallings Fig. 4.9)</span>
+            </div>
+            <div class="figure-canvas">
+              <svg viewBox="0 0 880 315" role="img" aria-label="Memoria de 1 MB organizada en 4 grupos A, B, C y D seleccionados por 2 bits del MAR">
+                <!-- MAR 20 bits -->
+                <text x="85" y="28" text-anchor="middle" font-size="12" font-weight="800" fill="var(--svg-text)">MAR (20 bits)</text>
+                <rect x="52" y="40" width="66" height="58" rx="4" fill="var(--svg-blue-soft)" stroke="var(--svg-blue)" stroke-width="1.8"/>
+                <text x="85" y="73" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="12" font-weight="700" fill="var(--svg-blue)">9 (Fila)</text>
+                <rect x="52" y="98" width="66" height="58" rx="4" fill="var(--svg-gold-soft)" stroke="var(--svg-gold)" stroke-width="1.8"/>
+                <text x="85" y="131" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="12" font-weight="700" fill="var(--svg-gold)">9 (Col.)</text>
+                <rect x="52" y="156" width="66" height="38" rx="4" fill="var(--svg-purple-soft)" stroke="var(--svg-purple)" stroke-width="2"/>
+                <text x="85" y="179" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="12" font-weight="800" fill="var(--svg-purple)">2 (Grupo)</text>
+
+                <!-- Decodificador Habilitación de Grupo -->
+                <path d="M 85 194 V 214" stroke="var(--svg-purple)" stroke-width="2.2" marker-end="url(#arrowBlue)"/>
+                <rect x="28" y="216" width="136" height="76" rx="6" fill="var(--svg-purple-soft)" stroke="var(--svg-purple)" stroke-width="2"/>
+                <text x="96" y="238" text-anchor="middle" font-size="11" font-weight="800" fill="var(--svg-text)">Habilitación de</text>
+                <text x="96" y="254" text-anchor="middle" font-size="11" font-weight="800" fill="var(--svg-purple)">Grupo de Chips</text>
+                <text x="96" y="276" text-anchor="middle" font-size="10.5" fill="var(--svg-text-muted)">Selecciona 1 entre 4</text>
+
+                <!-- 4 Columnas = Grupos A, B, C, D -->
+                <g font-size="12" font-weight="800" fill="var(--svg-purple)">
+                  <text x="265" y="28" text-anchor="middle">Grupo A (256 KB)</text>
+                  <text x="395" y="28" text-anchor="middle">Grupo B (256 KB)</text>
+                  <text x="525" y="28" text-anchor="middle">Grupo C (256 KB)</text>
+                  <text x="655" y="28" text-anchor="middle">Grupo D (256 KB)</text>
+                </g>
+
+                <!-- Fila superior de chips: A1, B1, C1, D1 (Bit 1) -->
+                <g stroke="var(--svg-navy)" stroke-width="1.8" fill="var(--svg-card)">
+                  <rect x="218" y="42" width="94" height="68" rx="6"/>
+                  <rect x="348" y="42" width="94" height="68" rx="6"/>
+                  <rect x="478" y="42" width="94" height="68" rx="6"/>
+                  <rect x="608" y="42" width="94" height="68" rx="6"/>
+                </g>
+                <g font-family="JetBrains Mono, monospace" font-size="13" font-weight="800" fill="var(--svg-text)" text-anchor="middle">
+                  <text x="265" y="76">Chip A1</text>
+                  <text x="395" y="76">Chip B1</text>
+                  <text x="525" y="76">Chip C1</text>
+                  <text x="655" y="76">Chip D1</text>
+                </g>
+                <g font-size="10" fill="var(--svg-purple)" font-weight="700" text-anchor="middle">
+                  <text x="234" y="103">E</text><text x="364" y="103">E</text><text x="494" y="103">E</text><text x="624" y="103">E</text>
+                </g>
+
+                <!-- Línea común Bit 1 hacia MBR -->
+                <line x1="265" y1="110" x2="265" y2="126" stroke="var(--svg-green)" stroke-width="2"/>
+                <line x1="395" y1="110" x2="395" y2="126" stroke="var(--svg-green)" stroke-width="2"/>
+                <line x1="525" y1="110" x2="525" y2="126" stroke="var(--svg-green)" stroke-width="2"/>
+                <line x1="655" y1="110" x2="655" y2="126" stroke="var(--svg-green)" stroke-width="2"/>
+                <line x1="265" y1="126" x2="778" y2="126" stroke="var(--svg-green)" stroke-width="2.4" marker-end="url(#arrowBlue)"/>
+                <text x="735" y="119" font-size="11" font-weight="700" fill="var(--svg-green)">Bit 1</text>
+
+                <!-- Indicación intermedia Chips 2..7 -->
+                <rect x="218" y="144" width="484" height="44" rx="6" fill="var(--svg-card-alt)" stroke="var(--svg-stroke-muted)" stroke-dasharray="5 3"/>
+                <text x="460" y="170" text-anchor="middle" font-size="12" font-weight="700" fill="var(--svg-text-muted)">
+                  Filas intermedias A2..D2 hasta A7..D7 (Todos los chips: 512 palabras × 512 bits)
+                </text>
+
+                <!-- Fila inferior de chips: A8, B8, C8, D8 (Bit 8) -->
+                <g stroke="var(--svg-navy)" stroke-width="1.8" fill="var(--svg-card)">
+                  <rect x="218" y="204" width="94" height="68" rx="6"/>
+                  <rect x="348" y="204" width="94" height="68" rx="6"/>
+                  <rect x="478" y="204" width="94" height="68" rx="6"/>
+                  <rect x="608" y="204" width="94" height="68" rx="6"/>
+                </g>
+                <g font-family="JetBrains Mono, monospace" font-size="13" font-weight="800" fill="var(--svg-text)" text-anchor="middle">
+                  <text x="265" y="238">Chip A8</text>
+                  <text x="395" y="238">Chip B8</text>
+                  <text x="525" y="238">Chip C8</text>
+                  <text x="655" y="238">Chip D8</text>
+                </g>
+                <g font-size="10" fill="var(--svg-purple)" font-weight="700" text-anchor="middle">
+                  <text x="234" y="265">E</text><text x="364" y="265">E</text><text x="494" y="265">E</text><text x="624" y="265">E</text>
+                </g>
+
+                <!-- Línea común Bit 8 hacia MBR -->
+                <line x1="265" y1="272" x2="265" y2="288" stroke="var(--svg-green)" stroke-width="2"/>
+                <line x1="395" y1="272" x2="395" y2="288" stroke="var(--svg-green)" stroke-width="2"/>
+                <line x1="525" y1="272" x2="525" y2="288" stroke="var(--svg-green)" stroke-width="2"/>
+                <line x1="655" y1="272" x2="655" y2="288" stroke="var(--svg-green)" stroke-width="2"/>
+                <line x1="265" y1="288" x2="808" y2="288" stroke="var(--svg-green)" stroke-width="2.4"/>
+                <line x1="808" y1="288" x2="808" y2="246" stroke="var(--svg-green)" stroke-width="2.4" marker-end="url(#arrowBlue)"/>
+                <text x="735" y="281" font-size="11" font-weight="700" fill="var(--svg-green)">Bit 8</text>
+
+                <!-- Líneas de selección de grupo desde el decodificador -->
+                <path d="M 164 236 H 204 V 98 H 218" fill="none" stroke="var(--svg-purple)" stroke-width="1.8"/>
+                <path d="M 164 252 H 336 V 260 H 348" fill="none" stroke="var(--svg-purple)" stroke-width="1.8"/>
+
+                <!-- MBR derecha -->
+                <rect x="782" y="106" width="62" height="140" rx="6" fill="var(--svg-green-soft)" stroke="var(--svg-green)" stroke-width="2"/>
+                <text x="813" y="94" text-anchor="middle" font-size="12" font-weight="800" fill="var(--svg-green)">MBR</text>
+                <text x="813" y="130" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" font-weight="700" fill="var(--svg-text)">Bit 1</text>
+                <text x="813" y="182" text-anchor="middle" font-size="13" fill="var(--svg-text)">⋮</text>
+                <text x="813" y="232" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" font-weight="700" fill="var(--svg-text)">Bit 8</text>
+              </svg>
+            </div>
+            <figcaption class="figure-caption">
+              <strong>Expansión vertical (número de palabras, Diap. 21):</strong> Los 18 bits superiores del MAR llegan a los 32 chips, pero la línea de habilitación de grupo (<code>E</code>) garantiza que solo los 8 chips del grupo elegido (A, B, C o D) conduzcan sus bits hacia el bus común del MBR.
+            </figcaption>
+          </figure>
+        </section>
+
+        <!-- Subsección 3.5: Diapositiva 22 -->
+        <section class="subsection" id="cap3-refresco">
+          <div class="subsection-head">
+            <h3>3.5 El Ciclo de Refresco en Memorias Dinámicas (DRAM)</h3>
+            <span class="slide-badge">Diapositiva 22</span>
+          </div>
+          <p>
+            A diferencia de la SRAM (donde los flip-flops mantienen el estado indefinidamente mientras haya energía), las celdas MOS de una <strong>DRAM almacenan bits como carga eléctrica en micro-condensadores</strong> que sufren descargas naturales en pocos milisegundos. Además, la propia operación de lectura descarga el condensador (lectura destructiva). Por ello, toda DRAM incorpora <strong>circuitería de refresco en el chip</strong>:
+          </p>
+          <div class="grid-4">
+            <div class="concept-box">
+              <h4>1. Inhabilitación</h4>
+              <p>Se inhabilita temporalmente la salida de datos del chip frente a peticiones externas normales.</p>
+            </div>
+            <div class="concept-box">
+              <h4>2. Barrido por Filas</h4>
+              <p>El <strong>contador de refresco</strong> incrementa su valor recorriendo secuencialmente las 2,048 filas.</p>
+            </div>
+            <div class="concept-box">
+              <h4>3. Lectura y Restauración</h4>
+              <p>Los amplificadores de lectura detectan el nivel de cada celda de la fila activa y la <strong>reescriben</strong> a plena carga.</p>
+            </div>
+            <div class="concept-box">
+              <h4>4. Coste Temporal</h4>
+              <p>El proceso consume tiempo útil del bus de memoria y <strong>reduce ligeramente las prestaciones aparentes</strong>.</p>
+            </div>
+          </div>
+        </section>
+      </article>
+
+      <!-- ====================================================================
+           CAPÍTULO 4: MEMORIA CACHÉ, LOCALIDAD Y DISEÑO (DIAP. 23–28)
+           ==================================================================== -->
+      <article class="chapter-card" id="cap4">
+        <header class="chapter-header">
+          <div class="chapter-meta">
+            <span class="chapter-number">Capítulo 04</span>
+            <span class="slide-badge">Diapositivas 23 – 28</span>
+          </div>
+          <h2>Memoria Intermedia (Caché), Principio de Localidad y Diseño</h2>
+          <p>
+            La memoria caché combina el tiempo de acceso de memorias semiconductoras rápidas y costosas (SRAM) con la gran capacidad de memorias dinámicas más económicas (DRAM), logrando que el tiempo medio efectivo de acceso se aproxime al de la propia caché de manera transparente para el programador.
+          </p>
+        </header>
+
+        <!-- Subsección 4.1: Diapositiva 23 -->
+        <section class="subsection" id="cap4-concepto">
+          <div class="subsection-head">
+            <h3>4.1 Concepto Arquitectónico y Granularidad de Transferencia</h3>
+            <span class="slide-badge">Diapositiva 23 · Fig. 4.13 Stallings</span>
+          </div>
+          <p>
+            La caché es una cantidad relativamente pequeña de memoria muy rápida interpuesta entre la CPU y la Memoria Principal, frecuentemente integrada dentro del mismo dado de silicio o módulo del procesador. La clave de su eficiencia radica en la <strong>asimetría intencional de transferencia</strong>: entre CPU y Caché fluyen <strong>palabras individuales</strong> a velocidad de núcleo, mientras que entre Caché y Memoria Principal se transfieren <strong>bloques completos</strong> de palabras contiguas.
+          </p>
+
+          <!-- FIGURA 4.1: CPU - Caché - Memoria Principal (Diapositiva 23) -->
+          <figure class="academic-figure">
+            <div class="figure-toolbar">
+              <span class="figure-label">Figura 4.1 · Interfaz de Transferencia de Palabras y Transferencia de Bloques</span>
+              <span class="figure-source">Rediseño vectorial en español · Diapositiva 23 (Stallings Fig. 4.13)</span>
+            </div>
+            <div class="figure-canvas">
+              <svg viewBox="0 0 840 215" role="img" aria-label="CPU conectada a Caché por transferencia de palabras y Caché conectada a Memoria Principal por transferencia de bloques">
+                <!-- CPU -->
+                <rect x="45" y="68" width="150" height="96" rx="10" fill="var(--svg-card-alt)" stroke="var(--svg-navy)" stroke-width="2.4"/>
+                <text x="120" y="114" text-anchor="middle" font-size="18" font-weight="800" fill="var(--svg-text)">CPU</text>
+                <text x="120" y="136" text-anchor="middle" font-size="11.5" fill="var(--svg-text-muted)">Núcleo de ejecución</text>
+
+                <!-- Transferencia de Palabras -->
+                <text x="275" y="34" text-anchor="middle" font-size="12.5" font-weight="800" fill="var(--svg-blue)">Transferencia de Palabras</text>
+                <text x="275" y="51" text-anchor="middle" font-size="11" fill="var(--svg-text-muted)">(Rápida · Baja latencia)</text>
+                <line x1="198" y1="102" x2="348" y2="102" stroke="var(--svg-blue)" stroke-width="3" marker-end="url(#arrowBlue)"/>
+                <line x1="348" y1="128" x2="198" y2="128" stroke="var(--svg-blue)" stroke-width="3" marker-end="url(#arrowBlue)"/>
+
+                <!-- Caché -->
+                <rect x="352" y="58" width="165" height="116" rx="10" fill="var(--svg-gold-soft)" stroke="var(--svg-gold)" stroke-width="2.4"/>
+                <text x="434" y="96" text-anchor="middle" font-size="16.5" font-weight="800" fill="var(--svg-text)">Memoria Caché</text>
+                <text x="434" y="118" text-anchor="middle" font-size="11.5" font-weight="700" fill="var(--svg-gold)">Líneas: [Etiqueta | Bloque]</text>
+                <text x="434" y="142" text-anchor="middle" font-size="11" fill="var(--svg-text-muted)">Pequeña · SRAM rápida</text>
+
+                <!-- Transferencia de Bloques -->
+                <text x="595" y="34" text-anchor="middle" font-size="12.5" font-weight="800" fill="var(--svg-gold)">Transferencia de Bloques</text>
+                <text x="595" y="51" text-anchor="middle" font-size="11" fill="var(--svg-text-muted)">(K palabras por línea)</text>
+                <line x1="520" y1="100" x2="665" y2="100" stroke="var(--svg-gold)" stroke-width="4.5" marker-end="url(#arrowGold)"/>
+                <line x1="665" y1="130" x2="520" y2="130" stroke="var(--svg-gold)" stroke-width="4.5" marker-end="url(#arrowGold)"/>
+
+                <!-- Memoria Principal -->
+                <rect x="670" y="36" width="142" height="156" rx="10" fill="var(--svg-card)" stroke="var(--svg-stroke)" stroke-width="2.4"/>
+                <text x="741" y="98" text-anchor="middle" font-size="15" font-weight="800" fill="var(--svg-text)">Memoria</text>
+                <text x="741" y="118" text-anchor="middle" font-size="15" font-weight="800" fill="var(--svg-text)">Principal</text>
+                <text x="741" y="144" text-anchor="middle" font-size="11" fill="var(--svg-text-muted)">2ⁿ palabras (DRAM)</text>
+              </svg>
+            </div>
+            <figcaption class="figure-caption">
+              <strong>Estructura en líneas (Diap. 23 y 24):</strong> Dado que existen muchos más bloques en Memoria Principal que líneas en la Caché, cada línea de caché incorpora un campo de <strong>Etiqueta (Tag)</strong> que identifica cuál bloque concreto de RAM reside actualmente en ella.
+            </figcaption>
+          </figure>
+        </section>
+
+        <!-- Subsección 4.2: Diapositiva 24 -->
+        <section class="subsection" id="cap4-operacion">
+          <div class="subsection-head">
+            <h3>4.2 Resumen Operativo de Lectura en Caché: Acierto vs. Fallo</h3>
+            <span class="slide-badge">Diapositiva 24</span>
+          </div>
+
+          <!-- FIGURA 4.2: Diagrama de flujo Acierto / Fallo (Diapositiva 24) -->
+          <figure class="academic-figure">
+            <div class="figure-toolbar">
+              <span class="figure-label">Figura 4.2 · Algoritmo Hardware de Operación de la Memoria Caché</span>
+              <span class="figure-source">Rediseño vectorial · Diapositiva 24</span>
+            </div>
+            <div class="figure-canvas">
+              <svg viewBox="0 0 880 230" role="img" aria-label="Diagrama de flujo de solicitud de CPU, comprobación en caché, acierto rápido o fallo con carga de bloque desde memoria principal">
+                <!-- Paso 1 -->
+                <rect x="24" y="75" width="168" height="76" rx="10" fill="var(--svg-card-alt)" stroke="var(--svg-navy)" stroke-width="2"/>
+                <text x="108" y="106" text-anchor="middle" font-size="12" font-weight="800" fill="var(--svg-text)">1. CPU emite dirección</text>
+                <text x="108" y="125" text-anchor="middle" font-size="11" fill="var(--svg-text-muted)">Solicita lectura RA</text>
+                <line x1="192" y1="113" x2="238" y2="113" stroke="var(--svg-blue)" stroke-width="2.2" marker-end="url(#arrowBlue)"/>
+
+                <!-- Decisión Rombo / Caja -->
+                <polygon points="335,52 432,113 335,174 238,113" fill="var(--svg-gold-soft)" stroke="var(--svg-gold)" stroke-width="2.2"/>
+                <text x="335" y="108" text-anchor="middle" font-size="11.5" font-weight="800" fill="var(--svg-text)">¿Bloque de RA</text>
+                <text x="335" y="124" text-anchor="middle" font-size="11.5" font-weight="800" fill="var(--svg-gold)">está en Caché?</text>
+
+                <!-- Rama SÍ (Acierto / Hit) -->
+                <path d="M 335 52 V 28 H 690 V 68" fill="none" stroke="var(--svg-green)" stroke-width="2.4" marker-end="url(#arrowBlue)"/>
+                <rect x="445" y="12" width="145" height="26" rx="13" fill="var(--svg-green-soft)" stroke="var(--svg-green)"/>
+                <text x="517" y="29" text-anchor="middle" font-size="11.5" font-weight="800" fill="var(--svg-green)">SÍ → Acierto (Hit)</text>
+
+                <!-- Rama NO (Fallo / Miss) -->
+                <path d="M 335 174 V 196 H 460" fill="none" stroke="var(--svg-rose)" stroke-width="2.4" marker-end="url(#arrowGold)"/>
+                <text x="395" y="190" text-anchor="middle" font-size="11.5" font-weight="800" fill="var(--svg-rose)">NO → Fallo (Miss)</text>
+
+                <!-- Bloque Miss: Carga desde MP -->
+                <rect x="462" y="158" width="212" height="62" rx="8" fill="var(--svg-rose-soft)" stroke="var(--svg-rose)" stroke-width="1.8"/>
+                <text x="568" y="183" text-anchor="middle" font-size="11.5" font-weight="700" fill="var(--svg-text)">Accede a Memoria Principal,</text>
+                <text x="568" y="200" text-anchor="middle" font-size="11" fill="var(--svg-rose)" font-weight="700">aloja el bloque + etiqueta en Caché</text>
+                <path d="M 674 189 H 755 V 152" fill="none" stroke="var(--svg-rose)" stroke-width="2.2" marker-end="url(#arrowBlue)"/>
+
+                <!-- Entrega final rápida a CPU -->
+                <rect x="665" y="70" width="188" height="80" rx="10" fill="var(--svg-green-soft)" stroke="var(--svg-green)" stroke-width="2.2"/>
+                <text x="759" y="102" text-anchor="middle" font-size="12.5" font-weight="800" fill="var(--svg-text)">Entrega palabra a CPU</text>
+                <text x="759" y="121" text-anchor="middle" font-size="11" fill="var(--svg-green)" font-weight="700">Operación completada</text>
+                <text x="759" y="137" text-anchor="middle" font-size="10.5" fill="var(--svg-text-muted)">desde la línea de Caché</text>
+              </svg>
+            </div>
+            <figcaption class="figure-caption">
+              <strong>Secuencia completa (Diap. 24):</strong> En caso de fallo, se transfiere el bloque completo desde Memoria Principal hacia una línea de Caché (actualizando su etiqueta) y la CPU recibe la palabra solicitada. En sistemas modernos la palabra crítica puede enviarse en paralelo a la CPU mientras se termina de llenar la línea.
+            </figcaption>
+          </figure>
+        </section>
+
+        <!-- Subsección 4.3: Diapositiva 25 -->
+        <section class="subsection" id="cap4-localidad">
+          <div class="subsection-head">
+            <h3>4.3 El Principio de Localidad de Referencia</h3>
+            <span class="slide-badge">Diapositiva 25</span>
+          </div>
+          <p>
+            ¿Por qué una caché diminuta frente a la RAM logra tasas de acierto superiores al 90–98%? Su éxito descansa en el <strong>Principio de Localidad de Referencia</strong>, sustentado en dos observaciones empíricas y arquitectónicas destacadas en la Diapositiva 25:
+          </p>
+          <ul>
+            <li><strong>Conjetura 90 – 10 de los programas:</strong> El análisis estadístico demuestra que los programas invierten aproximadamente el <strong>90% de su tiempo de ejecución en apenas el 10% de su código</strong> (bucles internos y rutinas críticas).</li>
+            <li><strong>Secuencialidad de la arquitectura ASPA (Arquitectura Secuencial de Programa Almacenado):</strong> Salvo instrucciones de bifurcación o llamada a subrutina, el contador de programa (<code>PC</code>) avanza a posiciones de memoria consecutivas, y las estructuras de datos (vectores, registros, tablas) se alojan contiguamente.</li>
+          </ul>
+
+          <div class="grid-2">
+            <div class="callout emerald" style="margin:0">
+              <div class="callout-title">Localidad Espacial (Forma de almacenamiento de datos)</div>
+              <p>
+                Tendencia a referenciar en el futuro inmediato <strong>ubicaciones físicamente contiguas o cercanas</strong> a la dirección recién accedida. Se aprovecha trayendo <strong>bloques de varias palabras</strong> en cada fallo de caché (ej. recorrer un arreglo <code>A[i]</code> o ejecutar instrucciones secuenciales).
+              </p>
+            </div>
+            <div class="callout" style="margin:0">
+              <div class="callout-title">Localidad Temporal (Ejecución cíclica y modular)</div>
+              <p>
+                Tendencia de un programa a <strong>volver a referenciar en un corto plazo la misma dirección</strong> que acaba de utilizar. Surge de estructuras iterativas (<code>for</code>, <code>while</code>), subrutinas modulares, pilas y variables acumuladoras, y se explota conservando los bloques recientes en caché.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Subsección 4.4: Diapositivas 26, 27 y 28 -->
+        <section class="subsection" id="cap4-diseno">
+          <div class="subsection-head">
+            <h3>4.4 Parámetros de Diseño, Conexión al Bus y Caso Base de Estudio</h3>
+            <span class="slide-badge">Diapositivas 26, 27 y 28</span>
+          </div>
+
+          <div class="grid-3">
+            <div class="concept-box">
+              <h4>1. Tamaño de Caché</h4>
+              <p>Suficientemente pequeña para mantener el coste medio cercano al de la RAM y lo bastante grande para maximizar la tasa de aciertos sin penalizar el retardo de direccionamiento.</p>
+            </div>
+            <div class="concept-box">
+              <h4>2. Función de Correspondencia</h4>
+              <p>Regla algorítmica que dicta en qué línea(s) de caché puede alojarse cada bloque de Memoria Principal: <strong>Directa</strong>, <strong>Asociativa</strong> o <strong>Asociativa por Conjuntos</strong>.</p>
+            </div>
+            <div class="concept-box">
+              <h4>3. Algoritmo de Sustitución</h4>
+              <p>Criterio hardware para elegir cuál línea ocupada desalojar ante un fallo: <strong>LRU</strong>, <strong>FIFO</strong>, <strong>LFU</strong> o <strong>Aleatoria</strong>.</p>
+            </div>
+            <div class="concept-box">
+              <h4>4. Política de Escritura</h4>
+              <p>Estrategia para propagar modificaciones hacia Memoria Principal evitando incoherencias: <strong>Write-Through</strong> o <strong>Write-Back</strong>.</p>
+            </div>
+            <div class="concept-box">
+              <h4>5. Tamaño del Bloque</h4>
+              <p>Al crecer desde muy pequeño mejora el acierto por localidad espacial, pero si es excesivo reduce el número total de líneas y encarece la penalización por fallo.</p>
+            </div>
+            <div class="concept-box">
+              <h4>6. Número de Cachés</h4>
+              <p>Un nivel vs. multinivel (<code>L1</code> en chip, <code>L2</code>, <code>L3</code>) y caché unificada vs. caché dividida Harvard (Instrucciones + Datos para evitar contención en segmentación/pipeline).</p>
+            </div>
+          </div>
+
+          <!-- FIGURA 4.3: Organización típica con buses (Diapositiva 27) -->
+          <figure class="academic-figure">
+            <div class="figure-toolbar">
+              <span class="figure-label">Figura 4.3 · Organización Típica de un Sistema con Caché Conectada a Buses</span>
+              <span class="figure-source">Rediseño vectorial en español · Diapositiva 27 (Stallings Fig. 4.16)</span>
+            </div>
+            <div class="figure-canvas">
+              <svg viewBox="0 0 840 265" role="img" aria-label="Procesador conectado a Caché, Buffer de Direcciones, Buffer de Datos y Bus del Sistema">
+                <!-- Procesador -->
+                <rect x="35" y="25" width="160" height="215" rx="10" fill="var(--svg-card-alt)" stroke="var(--svg-navy)" stroke-width="2.4"/>
+                <text x="115" y="136" text-anchor="middle" font-size="16.5" font-weight="800" fill="var(--svg-text)">Procesador</text>
+
+                <!-- Línea superior: Direcciones -->
+                <line x1="195" y1="52" x2="625" y2="52" stroke="var(--svg-blue)" stroke-width="2.5" marker-end="url(#arrowBlue)"/>
+                <text x="410" y="42" text-anchor="middle" font-size="12" font-weight="800" fill="var(--svg-blue)">Direcciones</text>
+                <line x1="410" y1="52" x2="410" y2="85" stroke="var(--svg-blue)" stroke-width="2.5" marker-end="url(#arrowBlue)"/>
+
+                <!-- Buffer de Direcciones -->
+                <rect x="630" y="28" width="76" height="50" rx="6" fill="var(--svg-card)" stroke="var(--svg-blue)" stroke-width="2"/>
+                <polygon points="656,42 680,53 656,64" fill="var(--svg-blue-soft)" stroke="var(--svg-blue)" stroke-width="1.5"/>
+                <text x="668" y="95" text-anchor="middle" font-size="11" font-weight="700" fill="var(--svg-text)">Buffer de</text>
+                <text x="668" y="109" text-anchor="middle" font-size="11" font-weight="700" fill="var(--svg-blue)">Direcciones</text>
+                <line x1="706" y1="52" x2="764" y2="52" stroke="var(--svg-blue)" stroke-width="2.5" marker-end="url(#arrowBlue)"/>
+
+                <!-- Caché Central -->
+                <rect x="342" y="88" width="136" height="92" rx="8" fill="var(--svg-gold-soft)" stroke="var(--svg-gold)" stroke-width="2.4"/>
+                <text x="410" y="139" text-anchor="middle" font-size="16" font-weight="800" fill="var(--svg-text)">Caché</text>
+
+                <!-- Líneas de Control -->
+                <line x1="202" y1="134" x2="338" y2="134" stroke="var(--svg-stroke)" stroke-width="2" marker-start="url(#arrowBlue)" marker-end="url(#arrowBlue)"/>
+                <text x="270" y="124" text-anchor="middle" font-size="11.5" font-weight="700" fill="var(--svg-text)">Control</text>
+
+                <line x1="482" y1="134" x2="764" y2="134" stroke="var(--svg-stroke)" stroke-width="2" marker-start="url(#arrowBlue)" marker-end="url(#arrowBlue)"/>
+                <text x="580" y="124" text-anchor="middle" font-size="11.5" font-weight="700" fill="var(--svg-text)">Control</text>
+
+                <!-- Línea inferior: Datos -->
+                <line x1="202" y1="215" x2="625" y2="215" stroke="var(--svg-green)" stroke-width="2.5" marker-start="url(#arrowBlue)" marker-end="url(#arrowBlue)"/>
+                <line x1="410" y1="184" x2="410" y2="215" stroke="var(--svg-green)" stroke-width="2.5" marker-start="url(#arrowBlue)"/>
+                <text x="410" y="236" text-anchor="middle" font-size="12" font-weight="800" fill="var(--svg-green)">Datos</text>
+
+                <!-- Buffer de Datos -->
+                <rect x="630" y="190" width="76" height="52" rx="6" fill="var(--svg-card)" stroke="var(--svg-green)" stroke-width="2"/>
+                <polygon points="654,200 676,209 654,218" fill="var(--svg-green-soft)" stroke="var(--svg-green)" stroke-width="1.3"/>
+                <polygon points="680,221 658,230 680,239" fill="var(--svg-green-soft)" stroke="var(--svg-green)" stroke-width="1.3"/>
+                <text x="668" y="168" text-anchor="middle" font-size="11" font-weight="700" fill="var(--svg-text)">Buffer de</text>
+                <text x="668" y="182" text-anchor="middle" font-size="11" font-weight="700" fill="var(--svg-green)">Datos</text>
+                <line x1="708" y1="215" x2="764" y2="215" stroke="var(--svg-green)" stroke-width="2.5" marker-start="url(#arrowBlue)" marker-end="url(#arrowBlue)"/>
+
+                <!-- Bus del Sistema -->
+                <rect x="768" y="16" width="14" height="234" rx="4" fill="var(--svg-navy)"/>
+                <text x="802" y="134" text-anchor="middle" transform="rotate(-90 802 134)" font-size="13" font-weight="800" fill="var(--svg-text)">Bus del Sistema</text>
+              </svg>
+            </div>
+            <figcaption class="figure-caption">
+              <strong>Aislamiento del Bus del Sistema (Diap. 27):</strong> En un <em>acierto de caché</em>, los buffers de direcciones y de datos permanecen inhabilitados y la transferencia ocurre exclusivamente entre Procesador y Caché, dejando libre el Bus del Sistema para operaciones de E/S o DMA. En un <em>fallo</em>, la dirección se vuelca al Bus del Sistema y el bloque entrante alimenta tanto a la Caché como al Procesador.
+            </figcaption>
+          </figure>
+
+          <!-- Caso Base de Estudio Diapositiva 28 -->
+          <div class="callout gold" id="cap4-ejemplo-base">
+            <div class="callout-title">Parámetros Oficiales del Caso de Estudio (Diapositiva 28 — Base para todas las correspondencias)</div>
+            <p>
+              Para comparar rigurosamente las tres funciones de correspondencia del Capítulo 5, la cátedra adopta el sistema canónico de Stallings:
+              <br />• <strong>Memoria Principal:</strong> <code>16 MBytes = 2<sup>24</sup> bytes</code> ⇒ Dirección física de <strong>24 bits</strong> (6 dígitos hexadecimales: <code>000000</code> a <code>FFFFFF</code>).
+              <br />• <strong>Tamaño del bloque (y de línea):</strong> <code>4 bytes</code> (32 bits de datos) ⇒ Campo de palabra <code>w = 2 bits</code> (<code>2<sup>2</sup> = 4</code> bytes) y <code>2<sup>22</sup> = 4M bloques</code> en RAM (<code>s = 22 bits</code>).
+              <br />• <strong>Memoria Caché:</strong> <code>64 KBytes</code> organizada en <strong><code>m = 16K = 2<sup>14</sup> = 16,384 líneas</code></strong> de 4 bytes cada una (numeradas de <code>0000</code> a <code>3FFF</code> en hexadecimal).
+            </p>
+          </div>
+        </section>
+      </article>
+
+      <!-- ====================================================================
+           CAPÍTULO 5: FUNCIONES DE CORRESPONDENCIA (MAPEO) (DIAP. 29–43)
+           ==================================================================== -->
+      <article class="chapter-card" id="cap5">
+        <header class="chapter-header">
+          <div class="chapter-meta">
+            <span class="chapter-number">Capítulo 05</span>
+            <span class="slide-badge">Diapositivas 29 – 43</span>
+          </div>
+          <h2>Funciones de Correspondencia (Mapeo de Caché)</h2>
+          <p>
+            Puesto que la caché dispone de <code>m = 16,384</code> líneas frente a los <code>4,194,304</code> bloques de Memoria Principal, se requiere una regla hardware determinista para ubicar y localizar bloques. Seleccione cada técnica o visualice las tres simultáneamente:
+          </p>
+        </header>
+
+        <!-- Navegación por Pestañas de Mapeo -->
+        <div class="mapping-tabs" role="tablist" aria-label="Métodos de correspondencia de caché">
+          <button type="button" class="mapping-tab-btn active" data-tab="directa">A) Correspondencia Directa (Diap. 29–34)</button>
+          <button type="button" class="mapping-tab-btn" data-tab="asociativa">B) Totalmente Asociativa (Diap. 35–38)</button>
+          <button type="button" class="mapping-tab-btn" data-tab="conjuntos">C) Asociativa por Conjuntos (Diap. 39–43)</button>
+          <button type="button" class="mapping-tab-btn" data-tab="all">Ver las 3 Completas</button>
+        </div>
+
+        <!-- ==================================================================
+             PANEL A: CORRESPONDENCIA DIRECTA (DIAPOSITIVAS 29–34)
+             ================================================================== -->
+        <div class="mapping-panel active" id="panel-directa">
+          <section id="cap5-directa">
+            <div class="subsection-head">
+              <h3>5.1 A) Correspondencia Directa</h3>
+              <span class="slide-badge">Diapositivas 29 – 34</span>
+            </div>
+            <p>
+              Es la técnica más sencilla: <strong>cada bloque individual de Memoria Principal se hace corresponder a una única línea posible de caché</strong> mediante aritmética modular:
+            </p>
+            <div class="formula-bar">
+              <span class="formula-math">i = j mod m</span>
+              <span class="formula-desc">donde <code>i</code> = n.º de línea de caché (<code>0 … m−1</code>), <code>j</code> = n.º de bloque de Memoria Principal, y <code>m = 2<sup>r</sup> = 2<sup>14</sup></code> líneas.</span>
+            </div>
+
+            <p>
+              La dirección física de <code>s + w = 24 bits</code> se interpreta en tres campos (<strong>Diapositivas 29 y 31</strong>):
+            </p>
+            <div class="bit-structure" aria-label="Estructura de 24 bits en correspondencia directa: 8 bits de etiqueta, 14 bits de línea y 2 bits de palabra">
+              <div class="bit-field tag" style="flex: 8">
+                <span class="bit-field-name">Etiqueta (t = s − r)</span>
+                <span class="bit-field-size">8 bits</span>
+              </div>
+              <div class="bit-field index" style="flex: 14">
+                <span class="bit-field-name">Línea o Bloque de Caché (b = r)</span>
+                <span class="bit-field-size">14 bits</span>
+              </div>
+              <div class="bit-field word" style="flex: 4">
+                <span class="bit-field-name">Palabra (w)</span>
+                <span class="bit-field-size">2 bits</span>
+              </div>
+            </div>
+
+            <ul>
+              <li><strong>Campo Palabra (<code>w = 2 bits</code>):</strong> Identifica unívocamente uno de los 4 bytes/unidades dentro del bloque.</li>
+              <li><strong>Campo Línea (<code>b = 14 bits</code>):</strong> Selecciona directamente cuál de las <code>2<sup>14</sup> = 16,384</code> ranuras o líneas de la caché inspeccionar.</li>
+              <li><strong>Campo Etiqueta (<code>t = 22 − 14 = 8 bits</code>):</strong> Distingue cuál de los <code>2<sup>8</sup> = 256</code> bloques de RAM que compiten por esa misma línea está actualmente cargado.</li>
+            </ul>
+
+            <!-- Tabla de asignación Diapositiva 30 -->
+            <div class="table-wrapper">
+              <table class="academic-table">
+                <thead>
+                  <tr>
+                    <th>Línea de Caché (i)</th>
+                    <th>Bloques de Memoria Principal Asignados (Diapositiva 30)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><code>0</code></td>
+                    <td><code>0, m, 2m, 3m, …, 2<sup>s</sup> − m</code></td>
+                  </tr>
+                  <tr>
+                    <td><code>1</code></td>
+                    <td><code>1, m + 1, 2m + 1, …, 2<sup>s</sup> − m + 1</code></td>
+                  </tr>
+                  <tr>
+                    <td><code>⋮</code></td>
+                    <td><code>⋮</code></td>
+                  </tr>
+                  <tr>
+                    <td><code>m − 1</code></td>
+                    <td><code>m − 1, 2m − 1, 3m − 1, …, 2<sup>s</sup> − 1</code></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- FIGURA 5.1 y 5.2: Correspondencia Directa (Diapositivas 32 y 33) -->
+            <figure class="academic-figure" id="cap5-directa-fig">
+              <div class="figure-toolbar">
+                <span class="figure-label">Figura 5.1 · Organización y Ejemplo Numérico de Correspondencia Directa</span>
+                <span class="figure-source">Rediseño vectorial en español · Diapositivas 32 y 33 (Stallings Fig. 4.17 y 4.18)</span>
+              </div>
+              <div class="figure-canvas" id="cap5-directa-ej">
+                <svg viewBox="0 0 900 355" role="img" aria-label="Organización hardware de correspondencia directa a la izquierda y ejemplo hexadecimal de 16 MB a 16K líneas a la derecha">
+                  <!-- MITAD IZQUIERDA: Esquema de Comparación (Diap. 32) -->
+                  <text x="215" y="24" text-anchor="middle" font-size="13" font-weight="800" fill="var(--svg-text)">Esquema de Comparación (Diap. 32)</text>
+
+                  <!-- Dirección -->
+                  <rect x="24" y="42" width="82" height="32" fill="var(--svg-blue-soft)" stroke="var(--svg-blue)" stroke-width="1.8"/>
+                  <text x="65" y="62" text-anchor="middle" font-size="11" font-weight="700" fill="var(--svg-blue)">Etiqueta (8)</text>
+                  <rect x="106" y="42" width="118" height="32" fill="var(--svg-gold-soft)" stroke="var(--svg-gold)" stroke-width="1.8"/>
+                  <text x="165" y="62" text-anchor="middle" font-size="11" font-weight="700" fill="var(--svg-gold)">Línea (14)</text>
+                  <rect x="224" y="42" width="66" height="32" fill="var(--svg-green-soft)" stroke="var(--svg-green)" stroke-width="1.8"/>
+                  <text x="257" y="62" text-anchor="middle" font-size="11" font-weight="700" fill="var(--svg-green)">Palabra (2)</text>
+
+                  <!-- Caché tabla -->
+                  <text x="345" y="62" text-anchor="middle" font-size="12" font-weight="800" fill="var(--svg-text)">Caché</text>
+                  <rect x="280" y="96" width="54" height="30" fill="var(--svg-card-alt)" stroke="var(--svg-stroke)"/>
+                  <rect x="334" y="96" width="84" height="30" fill="var(--svg-card)" stroke="var(--svg-stroke)"/>
+                  <text x="430" y="115" font-size="10.5" fill="var(--svg-text-muted)">L₀</text>
+
+                  <text x="350" y="148" text-anchor="middle" font-size="14" fill="var(--svg-text-muted)">⋮</text>
+
+                  <!-- Línea seleccionada Li -->
+                  <rect x="280" y="162" width="54" height="34" fill="var(--svg-blue-soft)" stroke="var(--svg-blue)" stroke-width="2.2"/>
+                  <text x="307" y="183" text-anchor="middle" font-size="10.5" font-weight="700" fill="var(--svg-blue)">Tag</text>
+                  <rect x="334" y="162" width="84" height="34" fill="var(--svg-gold-soft)" stroke="var(--svg-gold)" stroke-width="2.2"/>
+                  <text x="376" y="183" text-anchor="middle" font-size="10.5" font-weight="700" fill="var(--svg-text)">Datos</text>
+                  <text x="430" y="183" font-size="11" font-weight="700" fill="var(--svg-gold)">Lᵢ</text>
+
+                  <text x="350" y="218" text-anchor="middle" font-size="14" fill="var(--svg-text-muted)">⋮</text>
+                  <rect x="280" y="230" width="54" height="30" fill="var(--svg-card-alt)" stroke="var(--svg-stroke)"/>
+                  <rect x="334" y="230" width="84" height="30" fill="var(--svg-card)" stroke="var(--svg-stroke)"/>
+                  <text x="438" y="249" font-size="10.5" fill="var(--svg-text-muted)">Lₘ₋₁</text>
+
+                  <!-- Flecha Índice Línea -> Li -->
+                  <path d="M 165 74 V 179 H 276" fill="none" stroke="var(--svg-gold)" stroke-width="2.2" marker-end="url(#arrowGold)"/>
+
+                  <!-- Comparador (1 solo!) -->
+                  <rect x="36" y="215" width="96" height="42" rx="6" fill="var(--svg-blue-soft)" stroke="var(--svg-blue)" stroke-width="2"/>
+                  <text x="84" y="240" text-anchor="middle" font-size="11.5" font-weight="800" fill="var(--svg-blue)">Comparador</text>
+                  <line x1="65" y1="74" x2="65" y2="212" stroke="var(--svg-blue)" stroke-width="2" marker-end="url(#arrowBlue)"/>
+                  <path d="M 307 196 V 205 H 104 V 212" fill="none" stroke="var(--svg-blue)" stroke-width="2" marker-end="url(#arrowBlue)"/>
+
+                  <!-- Salidas Acierto / Fallo -->
+                  <path d="M 84 257 V 290 H 215" fill="none" stroke="var(--svg-green)" stroke-width="2.2" marker-end="url(#arrowBlue)"/>
+                  <text x="155" y="284" text-anchor="middle" font-size="11" font-weight="800" fill="var(--svg-green)">= 1 (Acierto de caché)</text>
+                  <path d="M 55 257 V 322 H 215" fill="none" stroke="var(--svg-rose)" stroke-width="2.2" marker-end="url(#arrowGold)"/>
+                  <text x="148" y="316" text-anchor="middle" font-size="11" font-weight="800" fill="var(--svg-rose)">= 0 (Fallo → ir a MP)</text>
+
+                  <!-- Separador vertical -->
+                  <line x1="468" y1="16" x2="468" y2="338" stroke="var(--svg-grid)" stroke-width="2"/>
+
+                  <!-- MITAD DERECHA: Ejemplo Hexadecimal (Diap. 33) -->
+                  <text x="684" y="24" text-anchor="middle" font-size="13" font-weight="800" fill="var(--svg-text)">Ejemplo en 16 MB RAM / 16K Líneas (Diap. 33)</text>
+
+                  <!-- Bloques de Memoria Principal -->
+                  <text x="562" y="48" text-anchor="middle" font-size="11" font-weight="700" fill="var(--svg-text-muted)">Memoria Principal (Tag | Línea+Pal.)</text>
+                  <rect x="495" y="58" width="138" height="232" rx="6" fill="var(--svg-card)" stroke="var(--svg-stroke)" stroke-width="1.8"/>
+                  <g font-family="JetBrains Mono, monospace" font-size="10.5" fill="var(--svg-text)">
+                    <text x="504" y="78"><tspan fill="var(--svg-blue)" font-weight="700">00</tspan> 0000: 13579246</text>
+                    <text x="504" y="96"><tspan fill="var(--svg-blue)" font-weight="700">00</tspan> FFFC: ...</text>
+                    <line x1="495" y1="108" x2="633" y2="108" stroke="var(--svg-grid)"/>
+                    <text x="504" y="128"><tspan fill="var(--svg-blue)" font-weight="700">16</tspan> 0004: 11235813</text>
+                    <text x="504" y="152"><tspan fill="var(--svg-blue)" font-weight="700">16</tspan> 339C: FEDCBA98</text>
+                    <text x="504" y="176"><tspan fill="var(--svg-blue)" font-weight="700">16</tspan> FFFC: 12345678</text>
+                    <line x1="495" y1="190" x2="633" y2="190" stroke="var(--svg-grid)"/>
+                    <text x="504" y="244"><tspan fill="var(--svg-blue)" font-weight="700">FF</tspan> FFF8: 11223344</text>
+                    <text x="504" y="268"><tspan fill="var(--svg-blue)" font-weight="700">FF</tspan> FFFC: 24682468</text>
+                  </g>
+
+                  <!-- Líneas de Caché (Tag 8b | Datos 32b | N.º Línea) -->
+                  <text x="775" y="48" text-anchor="middle" font-size="11" font-weight="700" fill="var(--svg-gold)">Caché (Etiqueta | Datos | Línea)</text>
+                  <rect x="688" y="68" width="142" height="196" rx="6" fill="var(--svg-gold-soft)" stroke="var(--svg-gold)" stroke-width="2"/>
+                  <g font-family="JetBrains Mono, monospace" font-size="10.5" fill="var(--svg-text)">
+                    <text x="696" y="88"><tspan fill="var(--svg-blue)" font-weight="700">00</tspan> | 13579246</text><text x="838" y="88" fill="var(--svg-gold)" font-weight="700">0000</text>
+                    <text x="696" y="114"><tspan fill="var(--svg-blue)" font-weight="700">16</tspan> | 11235813</text><text x="838" y="114" fill="var(--svg-gold)" font-weight="700">0001</text>
+                    <text x="696" y="154"><tspan fill="var(--svg-blue)" font-weight="700">16</tspan> | FEDCBA98</text><text x="838" y="154" fill="var(--svg-gold)" font-weight="700">0CE7</text>
+                    <text x="696" y="220"><tspan fill="var(--svg-blue)" font-weight="700">FF</tspan> | 11223344</text><text x="838" y="220" fill="var(--svg-gold)" font-weight="700">3FFE</text>
+                    <text x="696" y="246"><tspan fill="var(--svg-blue)" font-weight="700">16</tspan> | 12345678</text><text x="838" y="246" fill="var(--svg-gold)" font-weight="700">3FFF</text>
+                  </g>
+
+                  <!-- Conectores punteados de mapeo -->
+                  <g stroke="var(--svg-blue)" stroke-width="1.6" stroke-dasharray="4 3" fill="none">
+                    <path d="M 633 74 H 686"/>
+                    <path d="M 633 124 H 686"/>
+                    <path d="M 633 149 H 686"/>
+                    <path d="M 633 240 H 665 V 216 H 686"/>
+                    <path d="M 633 173 H 655 V 242 H 686"/>
+                  </g>
+                  <text x="684" y="318" text-anchor="middle" font-size="11.5" fill="var(--svg-text-muted)">
+                    Nota: 0x339C = 0011 0011 1001 11(00)₂ ⇒ los 14 bits de línea son 0x0CE7.
+                  </text>
+                </svg>
+              </div>
+              <figcaption class="figure-caption">
+                <strong>Verificación del ejemplo (Diap. 33):</strong> Observe que las direcciones <code>00FFFC</code>, <code>16FFFC</code> y <code>FFFFFC</code> poseen los mismos 14 bits de línea (<code>3FFF</code>), por lo que <strong>compiten obligatoriamente por la única línea <code>3FFF</code></strong>; jamás pueden coexistir dos de ellas a la vez.
+              </figcaption>
+            </figure>
+
+            <div class="grid-2" id="cap5-directa-pros">
+              <div class="callout emerald" style="margin:0">
+                <div class="callout-title">Ventajas (Diapositiva 34)</div>
+                <p>Implementación en hardware sumamente <strong>simple y poco costosa</strong>: acceso directo por decodificador sin búsqueda asociativa y un único comparador de 8 bits.</p>
+              </div>
+              <div class="callout rose" style="margin:0">
+                <div class="callout-title">Desventaja Principal: Thrashing (Diapositiva 34)</div>
+                <p>Al existir una posición rígida para cada bloque, si un programa referencia repetidamente dos bloques de distinta región que mapean a la misma línea, se expulsan mutuamente provocando continuos fallos de caché (<em>thrashing</em>).</p>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <!-- ==================================================================
+             PANEL B: CORRESPONDENCIA ASOCIATIVA (DIAPOSITIVAS 35–38)
+             ================================================================== -->
+        <div class="mapping-panel" id="panel-asociativa">
+          <section id="cap5-asociativa">
+            <div class="subsection-head">
+              <h3>5.2 B) Correspondencia Totalmente Asociativa</h3>
+              <span class="slide-badge">Diapositivas 35 – 38</span>
+            </div>
+            <p>
+              Supera la rigidez de la correspondencia directa permitiendo que <strong>cualquier bloque de Memoria Principal se cargue en cualquier línea libre de la caché</strong>. Desaparece el campo de índice de línea y la dirección se divide únicamente en dos campos:
+            </p>
+
+            <div class="bit-structure" aria-label="Estructura de 24 bits en correspondencia totalmente asociativa: 22 bits de etiqueta y 2 bits de palabra">
+              <div class="bit-field tag" style="flex: 22">
+                <span class="bit-field-name">Etiqueta unívoca del bloque (t = s)</span>
+                <span class="bit-field-size">22 bits</span>
+              </div>
+              <div class="bit-field word" style="flex: 4">
+                <span class="bit-field-name">Palabra (w)</span>
+                <span class="bit-field-size">2 bits</span>
+              </div>
+            </div>
+
+            <p>
+              Para determinar si un bloque está en la caché, la lógica de control debe <strong>comparar simultáneamente el campo Etiqueta de 22 bits contra las etiquetas de todas las 16,384 líneas a la vez</strong> (memoria asociativa / CAM).
+            </p>
+
+            <!-- FIGURA 5.3 y 5.4: Correspondencia Asociativa (Diapositivas 36, 37 y 38) -->
+            <figure class="academic-figure" id="cap5-asociativa-ej">
+              <div class="figure-toolbar">
+                <span class="figure-label">Figura 5.2 · Organización y Ejemplo de Caché Totalmente Asociativa</span>
+                <span class="figure-source">Rediseño vectorial en español · Diapositivas 36, 37 y 38 (Stallings Fig. 4.19 y 4.20)</span>
+              </div>
+              <div class="figure-canvas">
+                <svg viewBox="0 0 900 330" role="img" aria-label="Caché totalmente asociativa con comparación simultánea en todas las etiquetas de 22 bits y ejemplo hexadecimal">
+                  <!-- Izquierda: Comparación paralela -->
+                  <text x="215" y="24" text-anchor="middle" font-size="13" font-weight="800" fill="var(--svg-text)">Búsqueda Asociativa Simultánea (Diap. 36)</text>
+                  <rect x="28" y="42" width="195" height="32" fill="var(--svg-blue-soft)" stroke="var(--svg-blue)" stroke-width="1.8"/>
+                  <text x="125" y="62" text-anchor="middle" font-size="11" font-weight="700" fill="var(--svg-blue)">Etiqueta s = 22 bits</text>
+                  <rect x="223" y="42" width="68" height="32" fill="var(--svg-green-soft)" stroke="var(--svg-green)" stroke-width="1.8"/>
+                  <text x="257" y="62" text-anchor="middle" font-size="11" font-weight="700" fill="var(--svg-green)">Palabra (2)</text>
+
+                  <!-- Líneas L0..Lm-1 -->
+                  <rect x="260" y="96" width="84" height="32" fill="var(--svg-blue-soft)" stroke="var(--svg-blue)" stroke-width="1.8"/>
+                  <rect x="344" y="96" width="82" height="32" fill="var(--svg-card)" stroke="var(--svg-stroke)"/>
+                  <text x="436" y="116" font-size="10.5" fill="var(--svg-text-muted)">L₀</text>
+
+                  <rect x="260" y="150" width="84" height="32" fill="var(--svg-blue-soft)" stroke="var(--svg-blue)" stroke-width="1.8"/>
+                  <rect x="344" y="150" width="82" height="32" fill="var(--svg-card)" stroke="var(--svg-stroke)"/>
+                  <text x="436" y="170" font-size="10.5" fill="var(--svg-text-muted)">Lⱼ</text>
+
+                  <rect x="260" y="204" width="84" height="32" fill="var(--svg-blue-soft)" stroke="var(--svg-blue)" stroke-width="1.8"/>
+                  <rect x="344" y="204" width="82" height="32" fill="var(--svg-card)" stroke="var(--svg-stroke)"/>
+                  <text x="436" y="224" font-size="10.5" fill="var(--svg-text-muted)">Lₘ₋₁</text>
+
+                  <!-- Matriz Comparadora Asociativa -->
+                  <rect x="32" y="138" width="136" height="62" rx="8" fill="var(--svg-blue-soft)" stroke="var(--svg-blue)" stroke-width="2.2"/>
+                  <text x="100" y="164" text-anchor="middle" font-size="11.5" font-weight="800" fill="var(--svg-blue)">16,384 Comparadores</text>
+                  <text x="100" y="182" text-anchor="middle" font-size="10.5" font-weight="700" fill="var(--svg-text)">en paralelo (22 bits)</text>
+
+                  <line x1="85" y1="74" x2="85" y2="135" stroke="var(--svg-blue)" stroke-width="2.2" marker-end="url(#arrowBlue)"/>
+                  <path d="M 260 112 H 140 V 135" fill="none" stroke="var(--svg-blue)" stroke-width="1.6" marker-end="url(#arrowBlue)"/>
+                  <path d="M 260 166 H 171" fill="none" stroke="var(--svg-blue)" stroke-width="1.6" marker-end="url(#arrowBlue)"/>
+                  <path d="M 260 220 H 140 V 203" fill="none" stroke="var(--svg-blue)" stroke-width="1.6" marker-end="url(#arrowBlue)"/>
+
+                  <path d="M 100 200 V 265 H 235" fill="none" stroke="var(--svg-green)" stroke-width="2.2" marker-end="url(#arrowBlue)"/>
+                  <text x="172" y="258" text-anchor="middle" font-size="11" font-weight="800" fill="var(--svg-green)">Acierto en Lⱼ</text>
+                  <path d="M 62 200 V 298 H 235" fill="none" stroke="var(--svg-rose)" stroke-width="2.2" marker-end="url(#arrowGold)"/>
+                  <text x="160" y="292" text-anchor="middle" font-size="11" font-weight="800" fill="var(--svg-rose)">Fallo → Cargar bloque</text>
+
+                  <line x1="468" y1="16" x2="468" y2="316" stroke="var(--svg-grid)" stroke-width="2"/>
+
+                  <!-- Derecha: Ejemplo Hexadecimal (Diap. 37 y 38) -->
+                  <text x="684" y="24" text-anchor="middle" font-size="13" font-weight="800" fill="var(--svg-text)">Ejemplo de Alojamiento Libre (Diap. 37–38)</text>
+                  <rect x="492" y="54" width="128" height="218" rx="6" fill="var(--svg-card)" stroke="var(--svg-stroke)" stroke-width="1.8"/>
+                  <g font-family="JetBrains Mono, monospace" font-size="10.5" fill="var(--svg-text)">
+                    <text x="500" y="76">000000: 13579246</text>
+                    <text x="500" y="148">16339C: FEDCBA98</text>
+                    <text x="500" y="218">FFFFF4: 33333333</text>
+                    <text x="500" y="238">FFFFF8: 11223344</text>
+                    <text x="500" y="258">FFFFFC: 24682468</text>
+                  </g>
+
+                  <rect x="668" y="68" width="166" height="186" rx="6" fill="var(--svg-gold-soft)" stroke="var(--svg-gold)" stroke-width="2"/>
+                  <text x="751" y="58" text-anchor="middle" font-size="10.5" font-weight="700" fill="var(--svg-gold)">Tag (22b) | Datos (32b)</text>
+                  <g font-family="JetBrains Mono, monospace" font-size="10.5" fill="var(--svg-text)">
+                    <text x="676" y="92"><tspan fill="var(--svg-blue)" font-weight="700">3FFFFE</tspan> | 11223344</text><text x="842" y="92" fill="var(--svg-gold)" font-weight="700">0000</text>
+                    <text x="676" y="116"><tspan fill="var(--svg-blue)" font-weight="700">058CE7</tspan> | FEDCBA98</text><text x="842" y="116" fill="var(--svg-gold)" font-weight="700">0001</text>
+                    <text x="676" y="192"><tspan fill="var(--svg-blue)" font-weight="700">3FFFFD</tspan> | 33333333</text><text x="842" y="192" fill="var(--svg-gold)" font-weight="700">3FFD</text>
+                    <text x="676" y="216"><tspan fill="var(--svg-blue)" font-weight="700">000000</tspan> | 13579246</text><text x="842" y="216" fill="var(--svg-gold)" font-weight="700">3FFE</text>
+                    <text x="676" y="240"><tspan fill="var(--svg-blue)" font-weight="700">3FFFFF</tspan> | 24682468</text><text x="842" y="240" fill="var(--svg-gold)" font-weight="700">3FFF</text>
+                  </g>
+
+                  <g stroke="var(--svg-blue)" stroke-width="1.6" stroke-dasharray="4 3" fill="none">
+                    <path d="M 620 234 H 644 V 88 H 666"/>
+                    <path d="M 620 144 H 652 V 112 H 666"/>
+                    <path d="M 620 72 H 636 V 212 H 666"/>
+                    <path d="M 620 254 H 666"/>
+                  </g>
+                </svg>
+              </div>
+              <figcaption class="figure-caption">
+                <strong>Nota de precisión numérica (Diap. 37 y 38):</strong> Para la dirección <code>0xFFFFFC</code> (<code>1111 1111 1111 1111 1111 1100₂</code>), al desplazar los 2 bits de palabra (<code>00₂</code>) quedan los 22 bits de etiqueta <code>11 1111 1111 1111 1111 1111₂ = 0x3FFFFF</code> (tal como aparece en la Fig. 4.20 de Stallings; en la tabla resumida de la Diap. 38 se representa alineada a la izquierda como <code>FFFFFC</code>).
+              </figcaption>
+            </figure>
+
+            <div class="callout rose">
+              <div class="callout-title">Limitación de Escala (Diapositiva 35)</div>
+              <p>Aunque ofrece máxima flexibilidad para los algoritmos de sustitución, la circuitería asociativa necesaria para comparar simultáneamente miles de etiquetas largas resulta <strong>muy costosa y compleja</strong>, reservándose en la práctica para cachés pequeñas especializadas (como TLBs).</p>
+            </div>
+          </section>
+        </div>
+
+        <!-- ==================================================================
+             PANEL C: ASOCIATIVA POR CONJUNTOS (DIAPOSITIVAS 39–43)
+             ================================================================== -->
+        <div class="mapping-panel" id="panel-conjuntos">
+          <section id="cap5-conjuntos">
+            <div class="subsection-head">
+              <h3>5.3 C) Correspondencia Asociativa por Conjuntos (k-vías)</h3>
+              <span class="slide-badge">Diapositivas 39 – 43</span>
+            </div>
+            <p>
+              Combina las virtudes de las dos estrategias anteriores eliminando sus defectos: la caché se divide en <strong><code>S<sub>c</sub></code> conjuntos</strong> (<em>sets</em>), cada uno compuesto por <strong><code>B<sub>s</sub></code> líneas o vías</strong> (<em>ways</em>):
+            </p>
+            <div class="formula-bar">
+              <span class="formula-math">m = S<sub>c</sub> × B<sub>s</sub> &nbsp;|&nbsp; Conjunto i = j mod S<sub>c</sub></span>
+              <span class="formula-desc">Un bloque mapea de forma <strong>directa</strong> a un único conjunto <code>i</code>, pero puede alojarse de forma <strong>asociativa</strong> en cualquiera de las <code>B<sub>s</sub></code> líneas de dicho conjunto.</span>
+            </div>
+
+            <p>
+              En el caso de <strong>2 vías (<code>B<sub>s</sub> = 2</code>)</strong> desarrollado en las <strong>Diapositivas 40 a 43</strong>, las <code>16,384</code> líneas forman <strong><code>S<sub>c</sub> = 8,192 = 2<sup>13</sup></code> conjuntos</strong> (numerados de <code>0000</code> a <code>1FFF</code>). La dirección de 24 bits queda estructurada así:
+            </p>
+
+            <div class="bit-structure" aria-label="Estructura de 24 bits en correspondencia asociativa por conjuntos de 2 vías: 9 bits de etiqueta, 13 bits de conjunto y 2 bits de palabra">
+              <div class="bit-field tag" style="flex: 9">
+                <span class="bit-field-name">Etiqueta (t = s − d)</span>
+                <span class="bit-field-size">9 bits</span>
+              </div>
+              <div class="bit-field index" style="flex: 13">
+                <span class="bit-field-name">Conjunto (d)</span>
+                <span class="bit-field-size">13 bits</span>
+              </div>
+              <div class="bit-field word" style="flex: 4">
+                <span class="bit-field-name">Palabra (w)</span>
+                <span class="bit-field-size">2 bits</span>
+              </div>
+            </div>
+
+            <!-- FIGURA 5.5 y 5.6: Asociativa por Conjuntos de 2 vías (Diapositivas 42 y 43) -->
+            <figure class="academic-figure" id="cap5-conjuntos-fig">
+              <div class="figure-toolbar">
+                <span class="figure-label">Figura 5.3 · Estructura y Ejemplo de Caché Asociativa por Conjuntos de 2 Vías</span>
+                <span class="figure-source">Rediseño vectorial en español · Diapositivas 41, 42 y 43 (Stallings Fig. 4.21 y 4.22)</span>
+              </div>
+              <div class="figure-canvas" id="cap5-conjuntos-ej">
+                <svg viewBox="0 0 900 330" role="img" aria-label="Caché asociativa por conjuntos de dos vías donde el conjunto 1FFF aloja simultáneamente dos bloques con etiquetas 001 y 1FF">
+                  <!-- Izquierda: Arquitectura k comparadores -->
+                  <text x="215" y="24" text-anchor="middle" font-size="13" font-weight="800" fill="var(--svg-text)">Selección de Conjunto + k Vías (Diap. 42)</text>
+                  <rect x="24" y="42" width="84" height="32" fill="var(--svg-blue-soft)" stroke="var(--svg-blue)" stroke-width="1.8"/>
+                  <text x="66" y="62" text-anchor="middle" font-size="11" font-weight="700" fill="var(--svg-blue)">Tag (9)</text>
+                  <rect x="108" y="42" width="118" height="32" fill="var(--svg-gold-soft)" stroke="var(--svg-gold)" stroke-width="1.8"/>
+                  <text x="167" y="62" text-anchor="middle" font-size="11" font-weight="700" fill="var(--svg-gold)">Conjunto (13)</text>
+                  <rect x="226" y="42" width="64" height="32" fill="var(--svg-green-soft)" stroke="var(--svg-green)" stroke-width="1.8"/>
+                  <text x="258" y="62" text-anchor="middle" font-size="11" font-weight="700" fill="var(--svg-green)">Pal. (2)</text>
+
+                  <!-- Conjunto 0 y Conjunto i -->
+                  <rect x="275" y="94" width="142" height="50" rx="5" fill="var(--svg-card)" stroke="var(--svg-stroke)"/>
+                  <line x1="275" y1="119" x2="417" y2="119" stroke="var(--svg-grid)"/>
+                  <text x="346" y="112" text-anchor="middle" font-size="10" fill="var(--svg-text-muted)">Vía 0 (Tag | Datos)</text>
+                  <text x="346" y="137" text-anchor="middle" font-size="10" fill="var(--svg-text-muted)">Vía 1 (Tag | Datos)</text>
+                  <text x="424" y="123" font-size="10.5" font-weight="700" fill="var(--svg-text-muted)">Conj. 0</text>
+
+                  <rect x="275" y="168" width="142" height="56" rx="5" fill="var(--svg-gold-soft)" stroke="var(--svg-gold)" stroke-width="2.2"/>
+                  <line x1="275" y1="196" x2="417" y2="196" stroke="var(--svg-gold)"/>
+                  <text x="346" y="187" text-anchor="middle" font-size="10.5" font-weight="700" fill="var(--svg-text)">Vía 0: [Tag₀ | Datos₀]</text>
+                  <text x="346" y="215" text-anchor="middle" font-size="10.5" font-weight="700" fill="var(--svg-text)">Vía 1: [Tag₁ | Datos₁]</text>
+                  <text x="424" y="200" font-size="10.5" font-weight="800" fill="var(--svg-gold)">Conj. i</text>
+
+                  <!-- Índice de 13 bits apunta al Conjunto i -->
+                  <path d="M 167 74 V 196 H 272" fill="none" stroke="var(--svg-gold)" stroke-width="2.2" marker-end="url(#arrowGold)"/>
+
+                  <!-- Solo 2 comparadores rápidos de 9 bits! -->
+                  <rect x="34" y="176" width="114" height="52" rx="6" fill="var(--svg-blue-soft)" stroke="var(--svg-blue)" stroke-width="2"/>
+                  <text x="91" y="199" text-anchor="middle" font-size="11" font-weight="800" fill="var(--svg-blue)">Solo 2 Comparadores</text>
+                  <text x="91" y="215" text-anchor="middle" font-size="10" fill="var(--svg-text)">(Tag₀ y Tag₁ de 9 bits)</text>
+                  <line x1="66" y1="74" x2="66" y2="173" stroke="var(--svg-blue)" stroke-width="2" marker-end="url(#arrowBlue)"/>
+                  <path d="M 275 184 H 205 V 238 H 115 V 230" fill="none" stroke="var(--svg-blue)" stroke-width="1.6" marker-end="url(#arrowBlue)"/>
+
+                  <path d="M 91 228 V 286 H 235" fill="none" stroke="var(--svg-green)" stroke-width="2.2" marker-end="url(#arrowBlue)"/>
+                  <text x="165" y="279" text-anchor="middle" font-size="11" font-weight="800" fill="var(--svg-green)">Acierto en Vía 0 ó Vía 1</text>
+
+                  <line x1="472" y1="16" x2="472" y2="316" stroke="var(--svg-grid)" stroke-width="2"/>
+
+                  <!-- Derecha: Ejemplo 2 Vías (Diap. 41 y 43) -->
+                  <text x="686" y="24" text-anchor="middle" font-size="13" font-weight="800" fill="var(--svg-text)">Coexistencia en 2 Vías (Diap. 41 y 43)</text>
+
+                  <!-- Vía 0 y Vía 1 lado a lado -->
+                  <text x="580" y="54" text-anchor="middle" font-size="11" font-weight="800" fill="var(--svg-blue)">Vía 0 (Tag 9b | Datos)</text>
+                  <text x="688" y="54" text-anchor="middle" font-size="10.5" font-weight="800" fill="var(--svg-gold)">Conjunto</text>
+                  <text x="795" y="54" text-anchor="middle" font-size="11" font-weight="800" fill="var(--svg-purple)">Vía 1 (Tag 9b | Datos)</text>
+
+                  <rect x="498" y="66" width="156" height="175" rx="6" fill="var(--svg-card)" stroke="var(--svg-blue)" stroke-width="1.8"/>
+                  <rect x="720" y="66" width="156" height="175" rx="6" fill="var(--svg-card)" stroke="var(--svg-purple)" stroke-width="1.8"/>
+
+                  <g font-family="JetBrains Mono, monospace" font-size="10.5" fill="var(--svg-text)">
+                    <text x="506" y="90"><tspan fill="var(--svg-blue)" font-weight="700">000</tspan> | 13579246</text>
+                    <text x="688" y="90" text-anchor="middle" fill="var(--svg-gold)" font-weight="800">0000</text>
+                    <text x="728" y="90"><tspan fill="var(--svg-purple)" font-weight="700">001</tspan> | 77777777</text>
+
+                    <text x="506" y="118"><tspan fill="var(--svg-blue)" font-weight="700">001</tspan> | 11235813</text>
+                    <text x="688" y="118" text-anchor="middle" fill="var(--svg-gold)" font-weight="800">0001</text>
+                    <text x="728" y="118" fill="var(--svg-text-muted">--- | (libre)</text>
+
+                    <text x="506" y="152"><tspan fill="var(--svg-blue)" font-weight="700">02C</tspan> | FEDCBA98</text>
+                    <text x="688" y="152" text-anchor="middle" fill="var(--svg-gold)" font-weight="800">0CE7</text>
+                    <text x="728" y="152" fill="var(--svg-text-muted">--- | (libre)</text>
+
+                    <text x="506" y="196"><tspan fill="var(--svg-blue)" font-weight="700">1FF</tspan> | 11223344</text>
+                    <text x="688" y="196" text-anchor="middle" fill="var(--svg-gold)" font-weight="800">1FFE</text>
+                    <text x="728" y="196" fill="var(--svg-text-muted">--- | (libre)</text>
+
+                    <!-- Conjunto 1FFF resaltado (Diap. 41) -->
+                    <rect x="502" y="208" width="148" height="26" rx="4" fill="var(--svg-blue-soft)"/>
+                    <rect x="724" y="208" width="148" height="26" rx="4" fill="var(--svg-purple-soft)"/>
+                    <text x="506" y="225"><tspan fill="var(--svg-blue)" font-weight="700">001</tspan> | 12345678</text>
+                    <text x="688" y="225" text-anchor="middle" fill="var(--svg-gold)" font-weight="800">1FFF</text>
+                    <text x="728" y="225"><tspan fill="var(--svg-purple)" font-weight="700">1FF</tspan> | 24682468</text>
+                  </g>
+
+                  <text x="686" y="272" text-anchor="middle" font-size="11.5" font-weight="700" fill="var(--svg-text)">
+                    ¡Dos bloques con el mismo Conjunto (1FFF) residen juntos sin expulsarse!
+                  </text>
+                  <text x="686" y="292" text-anchor="middle" font-size="11" fill="var(--svg-text-muted)">
+                    Tag 001 + Set/Word 7FFC (= 0x00FFFC)  y  Tag 1FF + Set/Word 7FFC (= 0xFFFFFC)
+                  </text>
+                </svg>
+              </div>
+              <figcaption class="figure-caption">
+                <strong>Aclaración pedagógica sobre la notación de las Diapositivas 40 y 41:</strong> En Stallings Fig. 4.22 y la Diapositiva 41, las direcciones se escriben separando visualmente los 9 bits de etiqueta (3 dígitos hex: <code>000–1FF</code>) de los 15 bits de <code>Conjunto + Palabra</code> (4 dígitos hex: <code>0000–7FFF</code>). Al concatenar en binario los 9 bits de <code>1FF</code> (<code>111111111₂</code>) con los 15 bits de <code>7FFC</code> (<code>111 1111 1111 1100₂</code>), se obtiene exactamente la dirección de 24 bits <code>0xFFFFFC</code>; y para <code>001 7FFC</code> se obtiene <code>0x00FFFC</code>. Ambas caen en el conjunto <code>1FFF</code>.
+              </figcaption>
+            </figure>
+          </section>
+        </div>
+
+        <!-- Tabla Comparativa Resumen de las 3 Correspondencias -->
+        <div class="table-wrapper" style="margin-top:1.6rem">
+          <table class="academic-table">
+            <thead>
+              <tr>
+                <th>Criterio</th>
+                <th>A) Directa</th>
+                <th>B) Totalmente Asociativa</th>
+                <th>C) Asociativa por Conjuntos (2 vías)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Campos (24 bits)</strong></td>
+                <td><code>8 Tag | 14 Línea | 2 Palabra</code></td>
+                <td><code>22 Tag | 2 Palabra</code></td>
+                <td><code>9 Tag | 13 Conjunto | 2 Palabra</code></td>
+              </tr>
+              <tr>
+                <td><strong>Ubicación de bloque j</strong></td>
+                <td>Única línea fija (<code>j mod 16384</code>)</td>
+                <td>Cualquiera de las 16,384 líneas</td>
+                <td>Cualquiera de las 2 vías del conjunto <code>j mod 8192</code></td>
+              </tr>
+              <tr>
+                <td><strong>Comparadores</strong></td>
+                <td><code>1</code> comparador de 8 bits</td>
+                <td><code>16,384</code> comparadores de 22 bits</td>
+                <td><code>2</code> comparadores de 9 bits</td>
+              </tr>
+              <tr>
+                <td><strong>Tasa de conflicto</strong></td>
+                <td>Alta ante accesos alternados</td>
+                <td>Mínima (nula por conflicto)</td>
+                <td>Muy baja con coste hardware mínimo</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- ==================================================================
+             LABORATORIO INTERACTIVO DE DIRECCIONES DE 24 BITS (CASO STALLINGS)
+             ================================================================== -->
+        <section class="address-lab" id="address-lab" aria-label="Descomponedor interactivo de direcciones de 24 bits">
+          <div class="subsection-head" style="margin-bottom:0.35rem">
+            <h3 style="margin:0">Explorador Interactivo del Caso Stallings (24 bits · 16 MB RAM / 64 KB Caché)</h3>
+            <span class="slide-badge">Diapositivas 28 – 43</span>
+          </div>
+          <p style="font-size:0.9rem; margin-bottom:0.6rem">
+            Ingrese cualquier dirección física hexadecimal de 24 bits o pulse uno de los ejemplos de las diapositivas para verificar instantáneamente sus campos en las tres funciones de correspondencia:
+          </p>
+
+          <div class="lab-controls">
+            <div class="hex-input-group">
+              <span class="hex-prefix">0x</span>
+              <input
+                type="text"
+                id="stallings-hex-input"
+                class="hex-input"
+                value="16339C"
+                maxlength="6"
+                aria-label="Dirección hexadecimal de 24 bits"
+              />
+            </div>
+            <div class="preset-chips">
+              <button type="button" class="preset-btn" data-hex="000000">000000 (Diap. 33)</button>
+              <button type="button" class="preset-btn active" data-hex="16339C">16339C (Diap. 33/37)</button>
+              <button type="button" class="preset-btn" data-hex="00FFFC">00FFFC (001 7FFC · Diap. 41)</button>
+              <button type="button" class="preset-btn" data-hex="FFFFFC">FFFFFC (1FF 7FFC · Diap. 38/41)</button>
+              <button type="button" class="preset-btn" data-hex="16FFFC">16FFFC (Colisión 3FFF)</button>
+            </div>
+          </div>
+
+          <div class="binary-strip">
+            <span>Binario (24 bits): <strong id="lab-binary-full">0001 0110 0011 0011 1001 1100</strong></span>
+            <span id="lab-block-num" style="color:#fcd34d">Bloque j = 363,751 (0x058CE7)</span>
+          </div>
+
+          <div class="lab-results-grid">
+            <div class="lab-result-card">
+              <h4>A) Correspondencia Directa</h4>
+              <div class="kv-row"><span>Etiqueta (8b):</span><strong id="dir-tag-val">0x16 (00010110)</strong></div>
+              <div class="kv-row"><span>Línea Caché (14b):</span><strong id="dir-line-val">0x0CE7 (Línea 3,303)</strong></div>
+              <div class="kv-row"><span>Palabra / Byte (2b):</span><strong id="dir-word-val">00 (Byte 0)</strong></div>
+            </div>
+
+            <div class="lab-result-card">
+              <h4>B) Totalmente Asociativa</h4>
+              <div class="kv-row"><span>Etiqueta (22b):</span><strong id="assoc-tag-val">0x058CE7 (22 bits)</strong></div>
+              <div class="kv-row"><span>Línea destino:</span><strong id="assoc-line-val">Cualquiera (0x0000–0x3FFF)</strong></div>
+              <div class="kv-row"><span>Palabra / Byte (2b):</span><strong id="assoc-word-val">00 (Byte 0)</strong></div>
+            </div>
+
+            <div class="lab-result-card">
+              <h4>C) Conjuntos de 2 Vías</h4>
+              <div class="kv-row"><span>Etiqueta (9b):</span><strong id="set-tag-val">0x02C (000101100)</strong></div>
+              <div class="kv-row"><span>Conjunto (13b):</span><strong id="set-idx-val">0x0CE7 (Conj. 3,303)</strong></div>
+              <div class="kv-row"><span>Formato Stallings:</span><strong id="set-stallings-val">02C 339C (Notación Diap. 41)</strong></div>
+            </div>
+          </div>
+        </section>
+      </article>
+
+      <!-- ====================================================================
+           CAPÍTULO 6: ALGORITMOS DE SUSTITUCIÓN Y ESCRITURA (DIAP. 44–49)
+           ==================================================================== -->
+      <article class="chapter-card" id="cap6">
+        <header class="chapter-header">
+          <div class="chapter-meta">
+            <span class="chapter-number">Capítulo 06</span>
+            <span class="slide-badge">Diapositivas 44 – 49</span>
+          </div>
+          <h2>Algoritmos de Sustitución y Políticas de Escritura</h2>
+          <p>
+            Una vez llena la caché (o un conjunto asociativo), la llegada de un nuevo bloque exige decidir qué línea desalojar y cómo garantizar la coherencia de los datos modificados respecto a la Memoria Principal, otros procesadores y dispositivos de E/S.
+          </p>
+        </header>
+
+        <!-- Subsección 6.1: Diapositivas 44 y 45 -->
+        <section class="subsection" id="cap6-sustitucion">
+          <div class="subsection-head">
+            <h3>6.1 Algoritmos de Sustitución Implementados en Hardware</h3>
+            <span class="slide-badge">Diapositivas 44 y 45</span>
+          </div>
+          <p>
+            En <strong>Correspondencia Directa (Diapositiva 44)</strong> <em>no existe elección alguna</em>: como cada bloque tiene asignada una única línea posible, si dicha línea está ocupada debe ser sustituida incondicionalmente. En cambio, en <strong>correspondencia asociativa y asociativa por conjuntos (Diapositiva 45)</strong>, el algoritmo de reemplazo debe ejecutarse <strong>directamente en hardware</strong> para no degradar el ciclo de acceso:
+          </p>
+
+          <div class="grid-2">
+            <div class="concept-box">
+              <h4>1. LRU (Least Recently Used · Utilizado menos recientemente)</h4>
+              <p>
+                Sustituye el bloque candidato que ha permanecido más tiempo en la caché sin haber sido referenciado. Es el más efectivo por localidad temporal. <strong>Caso notable en 2 vías (Diap. 45):</strong> basta añadir <code>1 bit USE</code> por línea; cuando se referencia una línea del conjunto su bit pasa a <code>1</code> y el de la otra línea pasa a <code>0</code>, identificando inmediatamente cuál reemplazar.
+              </p>
+            </div>
+            <div class="concept-box">
+              <h4>2. FIFO (First-In, First-Out · Primero en entrar, primero en salir)</h4>
+              <p>
+                Sustituye aquel bloque que lleva más tiempo alojado en la caché desde su carga inicial, independientemente de cuántas veces se haya consultado recientemente. Se implementa fácilmente como una cola circular (<em>round-robin</em>).
+              </p>
+            </div>
+            <div class="concept-box">
+              <h4>3. LFU (Least Frequently Used · Utilizado menos frecuentemente)</h4>
+              <p>
+                Sustituye el bloque dentro del conjunto que ha experimentado <strong>menos referencias</strong> acumuladas, asociando un contador binario a cada línea de caché.
+              </p>
+            </div>
+            <div class="concept-box">
+              <h4>4. Sustitución Aleatoria (Random)</h4>
+              <p>
+                Escoge al azar una entre las líneas candidatas cuando ocurre un fallo. No depende del historial de uso, requiere circuitería mínima y en simulaciones reales exhibe una tasa de fallos solo ligeramente superior a LRU.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Subsección 6.2: Diapositivas 46, 47 y 48 -->
+        <section class="subsection" id="cap6-escritura">
+          <div class="subsection-head">
+            <h3>6.2 Políticas de Escritura y Riesgos de Incoherencia</h3>
+            <span class="slide-badge">Diapositivas 46, 47 y 48</span>
+          </div>
+          <p>
+            Antes de reemplazar un bloque residente en caché es obligatorio saber si ha sufrido modificaciones. Si la CPU escribe únicamente sobre la caché, la Memoria Principal queda <strong>desactualizada</strong> (dato obsoleto o <em>stale data</em>), generando dos escenarios críticos de incoherencia (<strong>Diapositiva 46</strong>):
+          </p>
+          <ul>
+            <li><strong>Módulos de E/S con acceso directo (DMA):</strong> Si un controlador de E/S lee directamente de Memoria Principal, obtendrá el valor antiguo si la caché aún retiene la modificación exclusiva; si el DMA escribe en RAM, invalidará el valor en caché.</li>
+            <li><strong>Sistemas Multiprocesador (múltiples CPUs):</strong> Si cada CPU posee su propia caché local, la modificación de una palabra en una caché invalida automáticamente las copias alojadas en las demás cachés.</li>
+          </ul>
+
+          <!-- FIGURA 6.1: Write-Through vs Write-Back (Diapositivas 47 y 48) -->
+          <figure class="academic-figure" id="cap6-writethrough">
+            <div class="figure-toolbar">
+              <span class="figure-label">Figura 6.1 · Comparación Arquitectónica: Write-Through vs. Write-Back</span>
+              <span class="figure-source">Rediseño vectorial en español · Diapositivas 47 y 48</span>
+            </div>
+            <div class="figure-canvas" id="cap6-writeback">
+              <svg viewBox="0 0 880 265" role="img" aria-label="Comparación visual entre Write Through que escribe en caché y memoria principal simultáneamente y Write Back que usa bit dirty y actualiza al reemplazar">
+                <!-- Izquierda: WRITE THROUGH -->
+                <rect x="20" y="18" width="405" height="230" rx="12" fill="var(--svg-card)" stroke="var(--svg-blue)" stroke-width="2"/>
+                <text x="222" y="46" text-anchor="middle" font-size="14" font-weight="800" fill="var(--svg-blue)">Write-Through (Escritura Inmediata · Diap. 47)</text>
+
+                <rect x="44" y="96" width="84" height="58" rx="8" fill="var(--svg-card-alt)" stroke="var(--svg-navy)" stroke-width="2"/>
+                <text x="86" y="129" text-anchor="middle" font-size="13" font-weight="800" fill="var(--svg-text)">CPU</text>
+
+                <rect x="168" y="96" width="102" height="58" rx="8" fill="var(--svg-gold-soft)" stroke="var(--svg-gold)" stroke-width="2"/>
+                <text x="219" y="129" text-anchor="middle" font-size="13" font-weight="800" fill="var(--svg-text)">Caché</text>
+
+                <rect x="310" y="84" width="96" height="82" rx="8" fill="var(--svg-blue-soft)" stroke="var(--svg-blue)" stroke-width="2"/>
+                <text x="358" y="120" text-anchor="middle" font-size="12" font-weight="800" fill="var(--svg-text)">Memoria</text>
+                <text x="358" y="138" text-anchor="middle" font-size="12" font-weight="800" fill="var(--svg-blue)">Principal</text>
+
+                <line x1="128" y1="125" x2="165" y2="125" stroke="var(--svg-rose)" stroke-width="3" marker-end="url(#arrowGold)"/>
+                <line x1="270" y1="125" x2="307" y2="125" stroke="var(--svg-rose)" stroke-width="3" marker-end="url(#arrowGold)"/>
+                <text x="222" y="80" text-anchor="middle" font-size="11" font-weight="700" fill="var(--svg-rose)">Toda escritura se propaga a ambas en el acto</text>
+                <text x="222" y="196" text-anchor="middle" font-size="11" fill="var(--svg-green)" font-weight="700">✓ MP siempre válida · Otras CPUs hacen snooping</text>
+                <text x="222" y="218" text-anchor="middle" font-size="11" fill="var(--svg-rose)" font-weight="700">✗ Genera intenso tráfico en bus y cuellos de botella</text>
+
+                <!-- Derecha: WRITE BACK -->
+                <rect x="455" y="18" width="405" height="230" rx="12" fill="var(--svg-card)" stroke="var(--svg-gold)" stroke-width="2"/>
+                <text x="657" y="46" text-anchor="middle" font-size="14" font-weight="800" fill="var(--svg-gold)">Write-Back (Post-Escritura · Diap. 48)</text>
+
+                <rect x="478" y="96" width="80" height="58" rx="8" fill="var(--svg-card-alt)" stroke="var(--svg-navy)" stroke-width="2"/>
+                <text x="518" y="129" text-anchor="middle" font-size="13" font-weight="800" fill="var(--svg-text)">CPU</text>
+
+                <rect x="594" y="88" width="128" height="74" rx="8" fill="var(--svg-gold-soft)" stroke="var(--svg-gold)" stroke-width="2.2"/>
+                <text x="658" y="114" text-anchor="middle" font-size="12.5" font-weight="800" fill="var(--svg-text)">Caché</text>
+                <rect x="606" y="125" width="104" height="24" rx="4" fill="var(--svg-rose-soft)" stroke="var(--svg-rose)"/>
+                <text x="658" y="141" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10.5" font-weight="700" fill="var(--svg-rose)">Dirty Bit = 1</text>
+
+                <rect x="756" y="84" width="88" height="82" rx="8" fill="var(--svg-card-alt)" stroke="var(--svg-stroke)" stroke-width="1.8"/>
+                <text x="800" y="120" text-anchor="middle" font-size="12" font-weight="800" fill="var(--svg-text)">Memoria</text>
+                <text x="800" y="138" text-anchor="middle" font-size="12" font-weight="700" fill="var(--svg-text-muted)">Principal</text>
+
+                <line x1="558" y1="125" x2="591" y2="125" stroke="var(--svg-green)" stroke-width="3" marker-end="url(#arrowBlue)"/>
+                <line x1="722" y1="125" x2="753" y2="125" stroke="var(--svg-gold)" stroke-width="2.4" stroke-dasharray="5 3" marker-end="url(#arrowGold)"/>
+                <text x="657" y="76" text-anchor="middle" font-size="11" font-weight="700" fill="var(--svg-gold)">Solo vuelca a MP al sustituir si Dirty = 1</text>
+                <text x="657" y="196" text-anchor="middle" font-size="11" fill="var(--svg-green)" font-weight="700">✓ Minimiza escrituras a RAM y acelera el procesador</text>
+                <text x="657" y="218" text-anchor="middle" font-size="11" fill="var(--svg-rose)" font-weight="700">✗ Exige protocolos de coherencia y control de E/S</text>
+              </svg>
+            </div>
+            <figcaption class="figure-caption">
+              <strong>Síntesis de políticas de escritura (Diap. 47 y 48):</strong> En <em>Write-Back</em>, porciones de la Memoria Principal permanecen temporalmente inválidas, por lo que los módulos de E/S deben acceder a través de la caché o bajo coordinación de hardware de coherencia (ej. protocolos tipo MESI en multiprocesadores).
+            </figcaption>
+          </figure>
+        </section>
+
+        <!-- Síntesis Final de Cierre (Diapositiva 49) -->
+        <section class="subsection" id="sintesis-final">
+          <div class="callout emerald" style="margin-bottom:0">
+            <div class="callout-title">Conclusión Académica de la Unidad 6 (Diapositiva 49)</div>
+            <p>
+              El desempeño global de un computador moderno no está dictado únicamente por la frecuencia de reloj de su ALU, sino por la eficiencia con que su <strong>Sistema de Memoria</strong> alimenta al procesador. La articulación de <strong>matrices DRAM multiplexadas y modulares</strong> junto con <strong>memorias caché asociativas por conjuntos, algoritmos hardware LRU y políticas Write-Back coherentes</strong> constituye la piedra angular que salva la brecha histórica de velocidad entre el CPU y el almacenamiento principal.
+            </p>
+          </div>
+        </section>
+      </article>
+
+      <!-- ====================================================================
+           MÓDULO 07: EVALUACIÓN ACADÉMICA INTERACTIVA (QUIZ + PUNTAJE + RESUMEN)
+           ==================================================================== -->
+      <article class="chapter-card quiz-chapter" id="quiz-evaluacion">
+        <header class="chapter-header">
+          <div class="chapter-meta">
+            <span class="chapter-number">Evaluación 07</span>
+            <span class="slide-badge">Cobertura Integral · Diapositivas 1 – 49</span>
+          </div>
+          <h2>Quiz Evaluativo Interactivo con Puntaje y Resumen Analítico</h2>
+          <p>
+            Pon a prueba tu dominio de la <strong>Unidad 6: Sistema de Memoria</strong> mediante <strong>18 reactivos tipo examen universitario</strong> (3 por cada capítulo) con calificación sobre <code>100 puntos</code>, justificación técnica inmediata, diagnóstico de dominio por capítulo y revisión completa de respuestas.
+          </p>
+        </header>
+
+        <!-- Barra de Configuración del Examen -->
+        <div class="quiz-config-bar">
+          <div class="quiz-mode-group">
+            <label for="quiz-mode-select" style="font-size:0.85rem; font-weight:700; color:var(--text-secondary)">Modalidad:</label>
+            <select id="quiz-mode-select" class="quiz-select">
+              <option value="all">Examen Completo Oficial (18 preguntas · Todos los capítulos)</option>
+              <option value="quick10">Práctica Rápida Aleatoria (10 preguntas)</option>
+              <option value="cap1">Solo Cap. 01 · Almacenamiento y Jerarquía (Diap. 1–7)</option>
+              <option value="cap2">Solo Cap. 02 · Caracterización de Memoria (Diap. 8–15)</option>
+              <option value="cap3">Solo Cap. 03 · Organización Principal DRAM/MAR (Diap. 16–22)</option>
+              <option value="cap4">Solo Cap. 04 · Caché y Localidad (Diap. 23–28)</option>
+              <option value="cap5">Solo Cap. 05 · Funciones de Correspondencia (Diap. 29–43)</option>
+              <option value="cap6">Solo Cap. 06 · Sustitución y Escritura (Diap. 44–49)</option>
+            </select>
+
+            <label class="quiz-toggle-label">
+              <input type="checkbox" id="quiz-shuffle-check" />
+              <span>Mezclar preguntas y opciones</span>
+            </label>
+          </div>
+
+          <button type="button" class="nav-btn" id="quiz-restart-top-btn" title="Reiniciar el intento actual desde cero">
+            ↻ Reiniciar Intento
+          </button>
+        </div>
+
+        <!-- VISTA ACTIVA DE PREGUNTAS -->
+        <div id="quiz-active-view">
+          <!-- Marcador en Vivo (HUD) -->
+          <div class="quiz-hud">
+            <div class="hud-box">
+              <span class="hud-label">Avance</span>
+              <span class="hud-value" id="hud-progress">0 / 18</span>
+            </div>
+            <div class="hud-box">
+              <span class="hud-label">Puntaje Actual</span>
+              <span class="hud-value score" id="hud-score">0 / 100 pts</span>
+            </div>
+            <div class="hud-box">
+              <span class="hud-label">Balance</span>
+              <span class="hud-value hits" id="hud-hits">0 ✓ · 0 ✗</span>
+            </div>
+            <div class="hud-box">
+              <span class="hud-label">Tiempo</span>
+              <span class="hud-value" id="hud-timer">00:00</span>
+            </div>
+          </div>
+
+          <!-- Navegador Matricial 1..N -->
+          <div class="quiz-stepper" id="quiz-stepper" aria-label="Navegador rápido de preguntas"></div>
+
+          <!-- Escenario de Pregunta Actual -->
+          <div class="quiz-question-stage">
+            <div class="quiz-q-meta">
+              <div class="quiz-q-tags">
+                <span class="quiz-q-chapter" id="quiz-q-chapter">Cap. 01 · Almacenamiento y Jerarquía</span>
+                <span class="slide-badge" id="quiz-q-slides">Diap. 3</span>
+              </div>
+              <span class="mono" style="font-size:0.82rem; font-weight:700; color:var(--text-muted)" id="quiz-q-counter-label">Pregunta 1 de 18</span>
+            </div>
+
+            <div class="quiz-q-prompt" id="quiz-q-prompt"></div>
+
+            <div class="quiz-options-list" id="quiz-options-list" role="group" aria-label="Opciones de respuesta"></div>
+
+            <!-- Caja de Retroalimentación Pedagógica -->
+            <div class="quiz-feedback-box" id="quiz-feedback-box" role="status" aria-live="polite">
+              <div class="quiz-feedback-head" id="quiz-feedback-head"></div>
+              <div class="quiz-feedback-body" id="quiz-feedback-body"></div>
+              <a href="#cap1" class="quiz-feedback-link" id="quiz-feedback-link">Repasar en el portal →</a>
+            </div>
+
+            <!-- Pie de Navegación del Quiz -->
+            <div class="quiz-controls-footer">
+              <div style="display:flex; gap:0.55rem">
+                <button type="button" class="nav-btn" id="quiz-prev-btn">← Anterior</button>
+                <button type="button" class="quiz-btn-primary" id="quiz-next-btn">Siguiente →</button>
+              </div>
+              <button type="button" class="quiz-btn-gold" id="quiz-finish-btn">
+                Finalizar y Ver Resumen Completo ✓
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- VISTA DE RESUMEN COMPLETO Y DIAGNÓSTICO -->
+        <div class="quiz-summary-view" id="quiz-summary-view">
+          <div class="summary-hero-card">
+            <div class="score-ring-wrap">
+              <svg class="score-ring-svg" viewBox="0 0 160 160" role="img" aria-label="Calificación final sobre 100 puntos">
+                <circle cx="80" cy="80" r="68" fill="none" stroke="var(--border-subtle)" stroke-width="12" />
+                <circle
+                  id="summary-ring-circle"
+                  cx="80"
+                  cy="80"
+                  r="68"
+                  fill="none"
+                  stroke="var(--svg-green)"
+                  stroke-width="12"
+                  stroke-linecap="round"
+                  transform="rotate(-90 80 80)"
+                  style="transition: stroke-dashoffset 0.7s ease"
+                />
+                <text x="80" y="78" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="34" font-weight="800" fill="var(--svg-text)" id="summary-ring-score">0</text>
+                <text x="80" y="102" text-anchor="middle" font-size="12" font-weight="700" fill="var(--svg-text-muted)">sobre 100 pts</text>
+              </svg>
+              <span class="grade-badge-pill" id="summary-grade-badge">Resultado</span>
+            </div>
+
+            <div>
+              <h3 id="summary-headline" style="font-size:1.38rem; margin-bottom:0.35rem">Resumen de Evaluación</h3>
+              <p id="summary-subtext" style="font-size:0.94rem; margin-bottom:0.5rem"></p>
+
+              <div class="summary-kpis">
+                <div class="kpi-tile">
+                  <strong id="kpi-correct" style="color:var(--accent-emerald)">0 / 18</strong>
+                  <span>Respuestas Correctas</span>
+                </div>
+                <div class="kpi-tile">
+                  <strong id="kpi-wrong" style="color:var(--accent-rose)">0</strong>
+                  <span>Incorrectas / En blanco</span>
+                </div>
+                <div class="kpi-tile">
+                  <strong id="kpi-time">00:00</strong>
+                  <span>Tiempo Empleado</span>
+                </div>
+                <div class="kpi-tile">
+                  <strong id="kpi-best" style="color:var(--accent-gold)">0 / 100</strong>
+                  <span>Mejor Récord Personal</span>
+                </div>
+              </div>
+
+              <div class="summary-actions-row">
+                <button type="button" class="quiz-btn-primary" id="summary-retry-all-btn">↻ Nuevo Intento (Mezclado)</button>
+                <button type="button" class="quiz-btn-gold" id="summary-retry-wrong-btn">Practicar Solo Falladas</button>
+                <button type="button" class="nav-btn" id="summary-print-btn">⎙ Imprimir / Guardar PDF</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Diagnóstico por Capítulo -->
+          <h3>Diagnóstico de Dominio por Capítulo</h3>
+          <p style="font-size:0.9rem">Porcentaje de acierto obtenido en cada bloque temático de las 49 diapositivas:</p>
+          <div class="chapter-mastery-grid" id="chapter-mastery-grid"></div>
+
+          <!-- Desglose Completo Pregunta por Pregunta -->
+          <div class="review-filter-bar">
+            <h3 style="margin:0">Revisión Detallada de Respuestas</h3>
+            <div class="review-filter-tabs">
+              <button type="button" class="preset-btn active" id="rev-filter-all">Todas</button>
+              <button type="button" class="preset-btn" id="rev-filter-wrong">Solo Incorrectas / En blanco</button>
+              <button type="button" class="preset-btn" id="rev-filter-ok">Solo Correctas</button>
+            </div>
+          </div>
+          <div class="review-list" id="quiz-review-list"></div>
+        </div>
+      </article>
+
+      <!-- ====================================================================
+           MÓDULO 08: CRÉDITOS DEL PROYECTO (ESTILO PORTAL ACADÉMICO AMC)
+           ==================================================================== -->
+      <article class="chapter-card credits-chapter" id="creditos">
+        <div class="credits-breadcrumb">
+          <a href="#inicio" style="color:inherit; text-decoration:none">Inicio</a>
+          <span>›</span>
+          <span class="current-crumb">Créditos</span>
+        </div>
+
+        <div class="credits-eyebrow">INFORMACIÓN</div>
+        <h2 class="credits-main-title">Créditos del Proyecto</h2>
+
+        <div class="credits-grid">
+          <!-- Tarjeta 1: ASIGNATURA -->
+          <div class="credit-card">
+            <div class="credit-icon" aria-hidden="true">🎓</div>
+            <div class="credit-category">ASIGNATURA</div>
+            <div class="credit-subject-name">Arquitectura de Máquinas Computadoras II</div>
+            <p class="credit-desc">
+              Plataforma educativa interactiva desarrollada como proyecto académico universitario de alto nivel para la <strong>UNI</strong>. Cubre íntegramente las 49 diapositivas de la Unidad 6: Sistema de Memoria.
+            </p>
+          </div>
+
+          <!-- Tarjeta 2: TECNOLOGÍAS USADAS -->
+          <div class="credit-card">
+            <div class="credit-icon" aria-hidden="true">🛠️</div>
+            <div class="credit-category">TECNOLOGÍAS USADAS</div>
+            <div class="tech-pills-wrap">
+              <span class="tech-pill">HTML5</span>
+              <span class="tech-pill">CSS3</span>
+              <span class="tech-pill">JavaScript</span>
+              <span class="tech-pill">SVG Vector</span>
+              <span class="tech-pill">CSS Variables</span>
+              <span class="tech-pill">Google Fonts</span>
+              <span class="tech-pill">LocalStorage</span>
+            </div>
+          </div>
+
+          <!-- Tarjeta 3: CONTENIDO -->
+          <div class="credit-card">
+            <div class="credit-icon" aria-hidden="true">📚</div>
+            <div class="credit-category">CONTENIDO</div>
+            <ul class="credit-checklist">
+              <li><span class="check-badge">✓</span><span>6 Capítulos completos (49 diapositivas)</span></li>
+              <li><span class="check-badge">✓</span><span>12 Diagramas vectoriales en español</span></li>
+              <li><span class="check-badge">✓</span><span>Explorador de direcciones de 24 bits</span></li>
+              <li><span class="check-badge">✓</span><span>Mapa interactivo de diapositivas</span></li>
+              <li><span class="check-badge">✓</span><span>Quiz con 18 preguntas y resumen</span></li>
+              <li><span class="check-badge">✓</span><span>Interfaz académica UNI (Claro / Oscuro)</span></li>
+            </ul>
+          </div>
+
+          <!-- Tarjeta 4: VERSIÓN -->
+          <div class="credit-card">
+            <div class="credit-icon" aria-hidden="true">⭐</div>
+            <div class="credit-category">VERSIÓN</div>
+            <ul class="credit-meta-list">
+              <li><strong>Versión:</strong> 1.0.0</li>
+              <li><strong>Año:</strong> 2026</li>
+              <li><strong>Institución:</strong> UNI — Nicaragua</li>
+              <li><strong>Licencia:</strong> Educativo / Libre</li>
+              <li><strong>Dispositivos:</strong> PC, Tablet, Móvil</li>
+              <li><strong>Modo:</strong> Claro / Oscuro Adaptativo</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+    </main>
+  </div>
+
+  <!-- Modal del Directorio Completo de las 49 Diapositivas -->
+  <div class="modal-backdrop" id="slides-modal" role="dialog" aria-modal="true" aria-labelledby="slides-modal-title">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <div>
+          <h3 id="slides-modal-title" style="margin:0">Índice Oficial de las 49 Diapositivas (Unidad6.pptx)</h3>
+          <span style="font-size:0.82rem; color:var(--text-muted)">Pulse cualquier diapositiva para ir directamente a su desarrollo teórico y figura rediseñada.</span>
+        </div>
+        <button type="button" class="nav-btn" id="close-slides-modal-btn" aria-label="Cerrar ventana">Cerrar ✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="slides-map-grid" id="slides-map-grid"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pie de Página Multicolumna Institucional UNI -->
+  <footer class="academic-footer">
+    <div class="footer-container">
+      <div class="footer-columns">
+        <div>
+          <div class="footer-col-title">Fundamentos y Hardware</div>
+          <ul class="footer-links">
+            <li><a href="#cap1">Cap. 1: Almacenamiento y Jerarquía</a></li>
+            <li><a href="#cap2">Cap. 2: Caracterización de la Memoria</a></li>
+            <li><a href="#cap3">Cap. 3: Organización Principal (DRAM)</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="footer-col-title">Sistema de Caché</div>
+          <ul class="footer-links">
+            <li><a href="#cap4">Cap. 4: Memoria Caché y Localidad</a></li>
+            <li><a href="#cap5">Cap. 5: Funciones de Correspondencia</a></li>
+            <li><a href="#cap6">Cap. 6: Sustitución y Escritura</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="footer-col-title">Recursos y Evaluación</div>
+          <ul class="footer-links">
+            <li><a href="#address-lab">Explorador de 24 bits (Stallings)</a></li>
+            <li><a href="#inicio" id="footer-slides-map-link">Mapa de las 49 Diapositivas</a></li>
+            <li><a href="#quiz-evaluacion">Quiz Interactivo</a></li>
+            <li><a href="#creditos">Créditos</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom-bar">
+        <div>
+          © 2026 — <span class="highlight-brand">Arquitectura de Máquinas Computadoras II</span> — UNI
+        </div>
+        <div>
+          Desarrollado con <span class="highlight-brand">HTML · CSS · JavaScript</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/app.js"></script>
+  <script src="js/quiz.js"></script>
+</body>
+</html>
